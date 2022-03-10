@@ -14,7 +14,7 @@ const ModelViewer = () => {
       ar
       ar-scale="fixed"
       poster="/poster.webp"
-      src="/spring-motion-ar.glb"
+      src="/spring-motion-ar-processed.glb"
       environment-image="neutral"
       alt="A 3D model of Derrick Adams Spring Rider"
       style={{ backgroundColor: "unset", width: "100%", height: "100%" }}
