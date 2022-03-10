@@ -15,7 +15,9 @@
   },
   "dependencies": {
     "@google/model-viewer": "^1.10.1",
+    "@loadable/component": "^5.15.2",
     "gatsby": "^4.9.2",
+    "gatsby-plugin-loadable-components-ssr": "^4.2.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
   },
