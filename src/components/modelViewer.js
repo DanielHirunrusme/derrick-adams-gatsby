@@ -13,7 +13,7 @@ const ModelViewer = () => {
       autoplay
       shadow-intensity="1"
       poster="/poster.webp"
-      src="/spring-rider-motion.glb"
+      src="/spring-rider.glb"
       max-camera-orbit="0 100deg auto"
       environment-image="neutral"
       alt="A 3D model of Derrick Adams Spring Rider"
