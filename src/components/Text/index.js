@@ -14,7 +14,7 @@ const Text = ({ progress }) => {
       style={{
         transform: `translateX(-${leftPos}px)`,
         position: "fixed",
-        bottom: "-.05em",
+        bottom: "0",
         left: 0,
         zIndex: "10",
         color: "blue",
@@ -25,7 +25,7 @@ const Text = ({ progress }) => {
       ref={ref}
       className={s.title}
     >
-      <h1><strong>Funtime Unicorn</strong> by <strong>Derrick Adams</strong></h1><span className={leftPos > 0 ? s.textShown : s.textHidden}>, brings to life not only the imagery he is
+      <h1><strong>FUNTIME UNICORN</strong> by <strong>DERRICK ADAMS</strong></h1><span className={leftPos > 0 ? s.textShown : s.textHidden}>, brings to life not only the imagery he is
       known for, but also the bodily experiences it is meant to capture. Each
       sculpture in the edition is a real-life manifestation of Adams’ signature
       iconography; a visual vocabulary composed of objects, symbols, colors, and
