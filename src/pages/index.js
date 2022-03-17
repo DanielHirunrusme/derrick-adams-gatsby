@@ -21,8 +21,6 @@ export default function Home({data}) {
 const images = data?.allFile?.edges
 const imageData = images?.map((img)=> getImage(img.node))
 
-console.log(imageData);
-
   useEffect(()=>{
     setIsWindow(true)
   }, [])
@@ -42,7 +40,7 @@ console.log(imageData);
         </Scene>
       </Controller>
 
-      {/* {isWindow && <ModelViewer />} */}
+      {isWindow && <ModelViewer />}
     </main>
   )
 }
@@ -54,6 +52,7 @@ query {
       node {
         id
         base
+        publicURL
         childImageSharp {
           gatsbyImageData(width: 1000, blurredOptions: {width: 100, toFormat: JPG}, placeholder: BLURRED)
         }

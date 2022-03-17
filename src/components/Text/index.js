@@ -25,7 +25,7 @@ const Text = ({ progress }) => {
       ref={ref}
       className={s.title}
     >
-      <h1><strong>Spring Rider</strong> by <strong>Derrick Adams</strong></h1><span className={leftPos > 0 ? s.textShown : s.textHidden}>, brings to life not only the imagery he is
+      <h1><strong>Funtime Unicorn</strong> by <strong>Derrick Adams</strong></h1><span className={leftPos > 0 ? s.textShown : s.textHidden}>, brings to life not only the imagery he is
       known for, but also the bodily experiences it is meant to capture. Each
       sculpture in the edition is a real-life manifestation of Adams’ signature
       iconography; a visual vocabulary composed of objects, symbols, colors, and
@@ -36,8 +36,7 @@ const Text = ({ progress }) => {
       people in various states of rest and play. Mounted atop colorful unicorns
       or candy shaped plastic floaties popularized in recent years, the figures
       represent an updated version of contemporary American iconography. Now
-      extended further into the grasp of individuals, TO BE TITLED (Unicorn
-      Spring Rider) provides a new way to experience the emotions evoked by
+      extended further into the grasp of individuals, <strong>Funtime Unicorn</strong> provides a new way to experience the emotions evoked by
       Adams’ paintings.</span>
     </article>
   )
