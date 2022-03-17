@@ -17,7 +17,7 @@ const ModelViewer = () => {
       max-camera-orbit="0 100deg auto"
       environment-image="neutral"
       alt="A 3D model of Derrick Adams Spring Rider"
-      style={{ backgroundColor: "unset", width: "100%", height: "100%" }}
+      style={{ backgroundColor: "unset", width: "100px", height: "100px", position: "fixed", left: "0px", bottom: "0", zIndex:"30" }}
       ar 
       ar-modes="webxr scene-viewer quick-look"
     >
