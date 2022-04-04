@@ -27,7 +27,7 @@ const ModelViewer = ({mode = "production"}) => {
           <div className="update-bar"></div>
         </div>
         <button slot="ar-button" className={s.arButton}>
-          View
+          <span>View ♞</span>
         </button>
       </model-viewer>
       </div>

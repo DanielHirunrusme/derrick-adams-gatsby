@@ -1,63 +1,158 @@
-import React, {useEffect, useState, useRef} from "react"
-import ReactDOM from "react-dom";
+import React, { useEffect, useState, useRef } from "react"
+import ReactDOM from "react-dom"
+import Marquee from "react-fast-marquee"
 
 // ScrollMagic
-import { Controller, Scene } from "react-scrollmagic";
-import Sequence from "../components/Sequence";
-import Text from "../components/Text";
+import { Controller, Scene } from "react-scrollmagic"
+import Sequence from "../components/Sequence"
+import Text from "../components/Text"
 import { graphql } from "gatsby" // to query for image data
-import {  getImage } from "gatsby-plugin-image"
+import { getImage } from "gatsby-plugin-image"
 
 import "../css/base.css"
 import * as s from "../css/index.module.css"
-import loadable from '@loadable/component'
-const ModelViewer = loadable(() => import('../components/modelViewer'))
+import loadable from "@loadable/component"
+const ModelViewer = loadable(() => import("../components/modelViewer"))
 
+const getRandDelay = () => {
+  return `${Math.random() * (2 - 1) + 0.15}s`
+}
 
-export default function Home({data}) {
-  const [isWindow, setIsWindow] = useState(false);
+export default function ComingSoon({ data }) {
+  const [isWindow, setIsWindow] = useState(false)
 
+  const images = data?.allFile?.edges
+  const imageData = images?.map(img => getImage(img.node))
 
-const images = data?.allFile?.edges
-const imageData = images?.map((img)=> getImage(img.node))
-
-  useEffect(()=>{
+  useEffect(() => {
     setIsWindow(true)
   }, [])
   return (
-    <main className={s.container}>
-      {/* <header className={s.header}>
-      <h1 className={s.title}><strong>Spring Rider</strong> by <strong>Derrick Adams</strong></h1>
-      </header> */}
-      <Controller>
-        <Scene duration="4000%" triggerHook="onLeave" pin>
-          {progress => (
-            <div style={{ height: "100vh", position: "relative" }}>
-              <Text progress={progress} />
-              <Sequence images={imageData}  progress={progress} />
-            </div>
-          )}
-        </Scene>
-      </Controller>
+    <main>
+      <Marquee gradient={false}>
+        <span className={s.marquee}>
+          Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon
+        </span>
+      </Marquee>
+      {/* <h1 className={s.titleComingSoonTop}>
+        <strong>DERRICK ADAMS</strong></h1> */}
+      <header className={s.header}>
+        <h1 className={s.titleComingSoon}>
+          <strong>
+            <span style={{ animationDelay: getRandDelay() }} className={s.blue}>
+              F
+            </span>
+            <span
+              style={{ animationDelay: getRandDelay() }}
+              className={s.green}
+            >
+              U
+            </span>
+            <span
+              style={{ animationDelay: getRandDelay() }}
+              className={s.yellow}
+            >
+              N
+            </span>
+            <span style={{ animationDelay: getRandDelay() }} className={s.red}>
+              T
+            </span>
+            <span
+              style={{ animationDelay: getRandDelay() }}
+              className={s.black}
+            >
+              I
+            </span>
+            <span style={{ animationDelay: getRandDelay() }} className={s.pink}>
+              M
+            </span>
+            <span
+              style={{ animationDelay: getRandDelay() }}
+              className={s.purple}
+            >
+              E
+            </span>
+            <span>&nbsp;</span>
+            <span style={{ animationDelay: getRandDelay() }} className={s.blue}>
+              U
+            </span>
+            <span
+              style={{ animationDelay: getRandDelay() }}
+              className={s.green}
+            >
+              N
+            </span>
+            <span
+              style={{ animationDelay: getRandDelay() }}
+              className={s.yellow}
+            >
+              I
+            </span>
+            <span style={{ animationDelay: getRandDelay() }} className={s.red}>
+              C
+            </span>
+            <span
+              style={{ animationDelay: getRandDelay() }}
+              className={s.black}
+            >
+              O
+            </span>
+            <span style={{ animationDelay: getRandDelay() }} className={s.pink}>
+              R
+            </span>
+            <span
+              style={{ animationDelay: getRandDelay() }}
+              className={s.purple}
+            >
+              N
+            </span>
+          </strong>
+          {/* <strong>by Derrick Adams</strong> */}
+          <strong>
+            &nbsp;
+            <span
+              className={s.black}
+              style={{ animationDelay: getRandDelay() }}
+            >
+              by
+            </span>
+            &nbsp;
+            <span
+              className={s.black}
+              style={{ animationDelay: getRandDelay() }}
+            >
+              Derrick
+            </span>{" "}
+            <span
+              className={s.black}
+              style={{ animationDelay: getRandDelay() }}
+            >
+              Adams
+            </span>
+          </strong>
+        </h1>
+      </header>
 
-      {isWindow && <ModelViewer />}
+      {isWindow && (
+        <div className="relative z-10">
+          <ModelViewer mode="coming soon" />
+        </div>
+      )}
+      <footer className={s.footer}>
+        <div  className={s.comingSoonFooter}>
+        <a href="http://www.derrickadams.com/" target="blank">
+          Website
+        </a>
+        <a href="https://www.instagram.com/derrickadamsny/" target="blank">
+          Instagram
+        </a>
+        </div>
+        {/* <Marquee gradient={false}>
+          <span className={s.marquee}>
+          Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon ⦁ Coming Soon
+          </span>
+        </Marquee> */}
+      </footer>
     </main>
   )
 }
-
-export const query = graphql`
-query {
-  allFile {
-    edges {
-      node {
-        id
-        base
-        publicURL
-        childImageSharp {
-          gatsbyImageData(width: 1000, blurredOptions: {width: 100, toFormat: JPG}, placeholder: BLURRED)
-        }
-      }
-    }
-  }
-}
-`
