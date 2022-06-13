@@ -1,54 +1,106 @@
-import cx from "classnames"
-import React, { useState, useRef } from "react"
-import Main from "../../static/main_trim_lores.mp4"
-import VR_1 from "../../static/vr_1_lores.mp4"
-import * as s from "../css/index.module.css"
-import ReactPlayer from "react-player"
+import cx from "classnames";
+import React, { useState, useRef, useEffect } from "react";
+import Main from "../../static/main_trim_lores.mp4";
+import VR_1 from "../../static/vr_1_lores.mp4";
+import * as s from "../css/index.module.css";
+import Button from "../components/button";
+import { Controller, Scene } from "react-scrollmagic";
+import Sequence from "../components/Sequence";
+import { graphql } from "gatsby"; // to query for image data
+import { getImage } from "gatsby-plugin-image";
+import { Stage, Layer, Image as KonvaImage } from "react-konva";
 
-export default function IndexPage() {
+const sortStringInts = (array) => {
+  array.sort(function (a, b) {
+    let aBase = a.node.base.split('.jpg')[0];
+    let bBase = b.node.base.split('.jpg')[0];
+    return Number(aBase) - Number(bBase);
+  });
+  return array;
+};
+
+export default function IndexPage({ data }) {
   // Refs
-  const mainVideo = useRef()
+  const mainVideo = useRef();
   // States
-  const [playing, setPlaying] = useState(false)
-  const [title, setTitle] = useState(true)
-  const [playbackRate, setPlaybackRate] = useState(1)
-  const [mainEnded, setMainEnded] = useState(false)
-  const [vrEnded, setVrEnded] = useState(false)
+  const [playing, setPlaying] = useState(false);
+  const [title, setTitle] = useState(true);
+  const [playbackRate, setPlaybackRate] = useState(1);
+  const [mainEnded, setMainEnded] = useState(false);
+  const [vrEnded, setVrEnded] = useState(false);
+  const [intervalId, setIntervalId] = useState(null);
+  const [mouseCoordinates, setMouseCoordinates] = useState({
+    x: null,
+    y: null,
+  });
 
+  const images = sortStringInts(data?.core?.edges);
+  const vr_1 = data?.vr_1?.edges;
+  // const imageData = images?.map((img) => getImage(img.node));
+
+  var imageData = [];
+  for (let i = 1; i < 785; i++) {
+    imageData.push(`/frames/${i}.jpg`);
+  }
+
+  var vr_1Data = [];
+  for (let i = 1; i < 444; i++) {
+    vr_1Data.push(`/vr_1/${i}.jpg`);
+  }
 
   const onMainEnded = () => {
     // play random VR video
-    console.log("mainEnded")
-    setMainEnded(true)
-  }
+    console.log("mainEnded");
+    setMainEnded(true);
+  };
 
-  const onClick = () => {}
+  const onClick = () => {};
 
   const onMouseDown = () => {
-    setPlaying(true)
-    setTitle(false)
+    setPlaying(true);
+    setTitle(false);
 
-    if(!vrEnded) {
-      setPlaying(true)
-    } else {
-      setMainEnded(false);
-      setVrEnded(false);
-      mainVideo.current.player.seekTo(0, 'seconds')
+    // if (!vrEnded) {
+    //   setPlaying(true);
+    // } else {
+    //   setMainEnded(false);
+    //   setVrEnded(false);
+    //   mainVideo.current.player.seekTo(0, "seconds");
+    // }
+
+    autoScroll();
+  };
+
+  const autoScroll = () => {
+    if (intervalId) {
+      clearInterval(intervalId);
+      setIntervalId(0);
     }
 
-    // if (intervalId) {
-    //   clearInterval(intervalId)
-    //   setIntervalId(0)
-    // }
-  }
+    console.log("auto scroll");
+
+    setIntervalId(
+      setInterval(() => {
+        window.scrollBy(0, 60);
+      }, 30)
+    );
+  };
 
   const onMouseUp = () => {
-    setPlaying(false)
-    // if (intervalId) {
-    //   clearInterval(intervalId);
-    //   setIntervalId(0);
-    //   return;
-    // }
+    setPlaying(false);
+    if (intervalId) {
+      clearInterval(intervalId);
+      setIntervalId(0);
+    }
+    setIntervalId(
+      setInterval(() => {
+        if (window.scrollY <= 0) {
+          setTitle(true);
+          clearInterval(intervalId);
+        }
+        window.scrollBy(0, -60);
+      }, 30)
+    );
     // const newIntervalId = setInterval(() => {
     //   console.log(mainVideo.current)
     //   let rwdTime = mainVideo.current.player.getCurrentTime() - .25;
@@ -64,66 +116,101 @@ export default function IndexPage() {
     // }, 30);
 
     // setIntervalId(newIntervalId);
-  }
+  };
+
+  const onMouseMove = (e) => {
+    if (typeof window) {
+      window.innerWidth > 768
+        ? setMouseCoordinates({ x: e.clientX, y: e.clientY })
+        : setMouseCoordinates({ x: "auto", y: "auto" });
+    }
+  };
 
   const onVrEnded = () => {
     setVrEnded(true);
-  }
+  };
 
   return (
-    <main className={s.main}>
-      <button
-        // onClick={onClick}
-        onClick={onMouseDown}
-        // onMouseUp={onMouseUp}
-        className={s.button}
-      >{!vrEnded ? "Play" : "Replay?" }</button>
+    <main onMouseMove={onMouseMove} className={s.main}>
+      {!playing && (
+        <header className={s.header}>
+          <a href="" className={s.bodyTextUppercase}>
+            Information
+          </a>
+          {/* <a href="" className={s.bodyTextUppercase}>
+            Inquire
+          </a> */}
+          <div className={s.external}>
+          <i class="fa-brands fa-instagram"></i>
+          <i class="fa-regular fa-envelope"></i>
+          </div>
+        </header>
+      )}
       <div className={cx(s.title, { [s.titleHidden]: !title })}>
         <div>
-          <h1  className={s.h1}>FUNTIME UNICORN</h1>
-          <p className={cx(s.bodyText, s.authorText)}>By Derrick Adams</p>
+          <h1 className={cx(s.h1, { [s.h1Hidden]: playing })}>
+            <span style={{ color: "#eaa3f8"}}>F</span>
+            <span style={{ color: "#8b12de"}}>U</span>
+            <span style={{ color: "#1536ab"}}>N</span>
+            <span style={{ color: "#20A12E"}}>T</span>
+            <span style={{ color: "#e1cd15"}}>I</span>
+            <span style={{ color: "#e1a115"}}>M</span>
+            <span style={{ color: "#CD1318"}}>E</span>
+            <span>&nbsp;</span>
+            <span style={{ color: "#eaa3f8"}}>U</span>
+            <span style={{ color: "#8b12de"}}>N</span>
+            <span style={{ color: "#1536ab"}}>I</span>
+            <span style={{ color: "#20A12E"}}>C</span>
+            <span style={{ color: "#e1cd15"}}>O</span>
+            <span style={{ color: "#e1a115"}}>R</span>
+            <span style={{ color: "#CD1318"}}>N</span>
+          </h1>
+          <p
+            className={cx(s.bodyText, s.authorText, {
+              [s.authorTextHidden]: playing,
+            })}
+          >
+            by <span className={s.bodyTextUppercase}>Derrick Adams</span>
+          </p>
         </div>
       </div>
-      <div className={cx(s.video, { [s.videoHidden]: mainEnded })}>
-        <ReactPlayer
-          ref={mainVideo}
-          onEnded={onMainEnded}
-          width="100%"
-          height="100%"
-          volume={0}
-          playing={playing}
-          playsinline={true}
-          url={Main}
-          muted={true}
-          controls={false}
-        />
-      </div>
-      <div className={cx(s.video, { [s.videoHidden]: !mainEnded })}>
-        <ReactPlayer
-          onEnded={onVrEnded}
-          playing={mainEnded}
-          width="100%"
-          height="100%"
-          volume={0}
-          playsinline={true}
-          url={VR_1}
-          muted={true}
-          controls={false}
-        />
-      </div>
-      <div className={cx(s.text, s.bodyText,  { [s.textHidden]: !vrEnded })}>
+
+      <Controller>
+        <Scene duration="4000%" triggerHook="onLeave" pin>
+          {(progress) => (
+            <div style={{ height: "100vh", position: "relative" }}>
+              <Button
+                onTouchStart={onMouseDown}
+                onTouchEnd={onMouseUp}
+                onMouseDown={onMouseDown}
+                onMouseUp={onMouseUp}
+                mouseCoordinates={mouseCoordinates}
+                progress={progress}
+                playing={playing}
+              />
+              <Sequence
+                images={imageData}
+                rawImages={images}
+                progress={progress}
+                vr_1={vr_1Data}
+              />
+            </div>
+          )}
+        </Scene>
+      </Controller>
+
+      {/* <div className={cx(s.text, s.bodyText, { [s.textHidden]: !vrEnded })}>
         <header className={s.header}>
           <h1 className={s.h1}>FUNTIME UNICORN</h1>
           <p className={s.authorText}>By Derrick Adams</p>
         </header>
         <nav className={cx(s.nav, s.bodyText)}>
-            <button className={s.bodyText}>About</button>
-            <button className={s.bodyText}>Gallery</button>
-            <button className={s.bodyText}>3D Viewer</button>
-            <button className={s.bodyText}>Share</button>
-          </nav>
+          <button className={s.bodyText}>About</button>
+          <button className={s.bodyText}>Gallery</button>
+          <button className={s.bodyText}>3D Viewer</button>
+          <button className={s.bodyText}>Share</button>
+        </nav>
         <div className={s.textContainer}>
-          
           <section className={s.section}>
             <article>
               Derrick Adams’ new edition, brings to life not only the imagery he
@@ -149,15 +236,44 @@ export default function IndexPage() {
               <div>3</div>
               <div>4</div>
             </article>
-            <article>
-              This is the 3D Viewer section
-            </article>
-            <article>
-              This is the share section
-            </article>
+            <article>This is the 3D Viewer section</article>
+            <article>This is the share section</article>
           </section>
         </div>
-      </div>
+      </div> */}
     </main>
-  )
+  );
 }
+
+export const query = graphql`
+  query {
+    core: allFile(filter: { relativeDirectory: { in: "frames" } }) {
+      edges {
+        node {
+          id
+          base
+          publicURL
+          childImageSharp {
+            gatsbyImageData
+          }
+        }
+      }
+    }
+    vr_1: allFile(filter: { relativeDirectory: { in: "vr_1" } }) {
+      edges {
+        node {
+          id
+          base
+          publicURL
+          childImageSharp {
+            gatsbyImageData(
+              width: 1000
+              blurredOptions: { width: 100, toFormat: JPG }
+              placeholder: BLURRED
+            )
+          }
+        }
+      }
+    }
+  }
+`;

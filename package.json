@@ -16,21 +16,30 @@
   },
   "dependencies": {
     "babel-plugin-styled-components": "^2.0.7",
+    "canvas": "^2.9.1",
     "classnames": "^2.3.1",
-    "gatsby": "^4.15.2",
+    "gatsby": "^4.16.0",
     "gatsby-plugin-google-analytics": "^4.15.0",
-    "gatsby-plugin-image": "^2.15.1",
+    "gatsby-plugin-image": "^2.16.1",
     "gatsby-plugin-manifest": "^4.15.1",
     "gatsby-plugin-react-helmet": "^5.15.0",
-    "gatsby-plugin-sharp": "^4.15.1",
+    "gatsby-plugin-sharp": "^4.16.1",
     "gatsby-plugin-sitemap": "^5.15.1",
     "gatsby-plugin-styled-components": "^5.15.0",
-    "gatsby-source-filesystem": "^4.15.0",
+    "gatsby-source-filesystem": "^4.16.0",
     "gatsby-transformer-sharp": "^4.15.1",
+    "konva": "^8.3.4",
     "react": "^18.1.0",
+    "react-circular-progressbar": "^2.0.4",
     "react-dom": "^18.1.0",
     "react-helmet": "^6.1.0",
+    "react-konva": "^18.1.1",
     "react-player": "^2.10.1",
-    "styled-components": "^5.3.5"
+    "react-scrollmagic": "^2.3.0",
+    "styled-components": "^5.3.5",
+    "use-image": "^1.0.12"
+  },
+  "devDependencies": {
+    "prettier": "^2.6.2"
   }
 }
