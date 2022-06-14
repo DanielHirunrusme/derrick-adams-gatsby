@@ -6,14 +6,15 @@ import * as s from "../css/index.module.css";
 import Button from "../components/button";
 import { Controller, Scene } from "react-scrollmagic";
 import Sequence from "../components/Sequence";
+import Content from "../components/Content";
 import { graphql } from "gatsby"; // to query for image data
 import { getImage } from "gatsby-plugin-image";
 import { Stage, Layer, Image as KonvaImage } from "react-konva";
 
 const sortStringInts = (array) => {
   array.sort(function (a, b) {
-    let aBase = a.node.base.split('.jpg')[0];
-    let bBase = b.node.base.split('.jpg')[0];
+    let aBase = a.node.base.split(".jpg")[0];
+    let bBase = b.node.base.split(".jpg")[0];
     return Number(aBase) - Number(bBase);
   });
   return array;
@@ -24,6 +25,8 @@ export default function IndexPage({ data }) {
   const mainVideo = useRef();
   // States
   const [playing, setPlaying] = useState(false);
+  const [ended, setEnded] = useState(false);
+  const [currentTime, setCurrentTime] = useState(false);
   const [title, setTitle] = useState(true);
   const [playbackRate, setPlaybackRate] = useState(1);
   const [mainEnded, setMainEnded] = useState(false);
@@ -35,7 +38,7 @@ export default function IndexPage({ data }) {
   });
 
   const images = sortStringInts(data?.core?.edges);
-  const vr_1 = data?.vr_1?.edges;
+  const vr_1 = sortStringInts(data?.vr_1?.edges);
   // const imageData = images?.map((img) => getImage(img.node));
 
   var imageData = [];
@@ -59,15 +62,6 @@ export default function IndexPage({ data }) {
   const onMouseDown = () => {
     setPlaying(true);
     setTitle(false);
-
-    // if (!vrEnded) {
-    //   setPlaying(true);
-    // } else {
-    //   setMainEnded(false);
-    //   setVrEnded(false);
-    //   mainVideo.current.player.seekTo(0, "seconds");
-    // }
-
     autoScroll();
   };
 
@@ -77,45 +71,35 @@ export default function IndexPage({ data }) {
       setIntervalId(0);
     }
 
-    console.log("auto scroll");
-
     setIntervalId(
       setInterval(() => {
-        window.scrollBy(0, 60);
+        if (!ended) {
+          window.scrollBy(0, 60);
+        } else {
+          setPlaying(false);
+          clearInterval(intervalId);
+        }
       }, 30)
     );
   };
 
   const onMouseUp = () => {
-    setPlaying(false);
-    if (intervalId) {
-      clearInterval(intervalId);
-      setIntervalId(0);
+    if (!ended) {
+      setPlaying(false);
+      if (intervalId) {
+        clearInterval(intervalId);
+        setIntervalId(0);
+      }
+      setIntervalId(
+        setInterval(() => {
+          if (window.scrollY <= 0) {
+            setTitle(true);
+            clearInterval(intervalId);
+          }
+          window.scrollBy(0, -60);
+        }, 30)
+      );
     }
-    setIntervalId(
-      setInterval(() => {
-        if (window.scrollY <= 0) {
-          setTitle(true);
-          clearInterval(intervalId);
-        }
-        window.scrollBy(0, -60);
-      }, 30)
-    );
-    // const newIntervalId = setInterval(() => {
-    //   console.log(mainVideo.current)
-    //   let rwdTime = mainVideo.current.player.getCurrentTime() - .25;
-    //   // let time = mainVideo.player.getCurrentTime() - 1;
-    //   if(rwdTime > 0) {
-    //     console.log('rwdTime', rwdTime);
-    //     mainVideo.current.player.seekTo(rwdTime, 'seconds')
-    //   } else {
-    //     mainVideo.current.player.seekTo(0, 'seconds')
-    //     clearInterval(newIntervalId)
-    //     setIntervalId(0);
-    //   }
-    // }, 30);
-
-    // setIntervalId(newIntervalId);
   };
 
   const onMouseMove = (e) => {
@@ -130,47 +114,64 @@ export default function IndexPage({ data }) {
     setVrEnded(true);
   };
 
+  const aboutClick = (e) => {
+    e.preventDefault();
+    setEnded(true);
+    setPlaying(true);
+    if(typeof window) {
+      let offset = document.getElementById('About').offsetTop - window.innerHeight/2;
+      window.scrollTo({
+        top: offset,
+        left: 0,
+        behavior: 'smooth'
+      })
+    }
+
+  }
+
   return (
     <main onMouseMove={onMouseMove} className={s.main}>
       {!playing && (
         <header className={s.header}>
-          <a href="" className={s.bodyTextUppercase}>
-            Information
-          </a>
+          <nav>
+            <a  href="#about">About</a>,&nbsp;
+            <a href="#gallery">Gallery</a>,&nbsp;
+            <a href="#purchase">Purchase</a>
+          </nav>
           {/* <a href="" className={s.bodyTextUppercase}>
             Inquire
           </a> */}
           <div className={s.external}>
-          <i class="fa-brands fa-instagram"></i>
-          <i class="fa-regular fa-envelope"></i>
+            <a href="https://www.instagram.com/derrickadamsny" target="blank"><i className="fa-brands fa-instagram"></i></a>
+            {/* <i class="fa-regular fa-envelope"></i> */}
           </div>
         </header>
       )}
       <div className={cx(s.title, { [s.titleHidden]: !title })}>
         <div>
           <h1 className={cx(s.h1, { [s.h1Hidden]: playing })}>
-            <span style={{ color: "#eaa3f8"}}>F</span>
-            <span style={{ color: "#8b12de"}}>U</span>
-            <span style={{ color: "#1536ab"}}>N</span>
-            <span style={{ color: "#20A12E"}}>T</span>
-            <span style={{ color: "#e1cd15"}}>I</span>
-            <span style={{ color: "#e1a115"}}>M</span>
-            <span style={{ color: "#CD1318"}}>E</span>
+            <span style={{ color: "#F395C7" }}>F</span>
+            <span style={{ color: "#6A03A7" }}>U</span>
+            <span style={{ color: "#016EB3" }}>N</span>
+            <span style={{ color: "#00B242" }}>T</span>
+            <span style={{ color: "#FFD600" }}>I</span>
+            <span style={{ color: "#FF6B15" }}>M</span>
+            <span style={{ color: "#E13E53" }}>E</span>
             <span>&nbsp;</span>
-            <span style={{ color: "#eaa3f8"}}>U</span>
-            <span style={{ color: "#8b12de"}}>N</span>
-            <span style={{ color: "#1536ab"}}>I</span>
-            <span style={{ color: "#20A12E"}}>C</span>
-            <span style={{ color: "#e1cd15"}}>O</span>
-            <span style={{ color: "#e1a115"}}>R</span>
-            <span style={{ color: "#CD1318"}}>N</span>
+            <span style={{ color: "#F395C7" }}>U</span>
+            <span style={{ color: "#6A03A7" }}>N</span>
+            <span style={{ color: "#016EB3" }}>I</span>
+            <span style={{ color: "#00B242" }}>C</span>
+            <span style={{ color: "#FFD600" }}>O</span>
+            <span style={{ color: "#FF6B15" }}>R</span>
+            <span style={{ color: "#E13E53" }}>N</span>
           </h1>
           <p
-            className={cx(s.bodyText, s.authorText, {
+            className={cx(s.authorText, {
               [s.authorTextHidden]: playing,
             })}
           >
-            by <span className={s.bodyTextUppercase}>Derrick Adams</span>
+            by Derrick Adams
           </p>
         </div>
       </div>
@@ -178,25 +179,31 @@ export default function IndexPage({ data }) {
       <Controller>
         <Scene duration="4000%" triggerHook="onLeave" pin>
           {(progress) => (
-            <div style={{ height: "100vh", position: "relative" }}>
-              <Button
-                onTouchStart={onMouseDown}
-                onTouchEnd={onMouseUp}
-                onMouseDown={onMouseDown}
-                onMouseUp={onMouseUp}
-                mouseCoordinates={mouseCoordinates}
-                progress={progress}
-                playing={playing}
-              />
-              <Sequence
-                images={imageData}
-                rawImages={images}
-                progress={progress}
-                vr_1={vr_1Data}
-              />
-            </div>
+            <>
+              <div style={{ height: "4000vh", position: "relative" }}>
+                <Button
+                  onTouchStart={onMouseDown}
+                  onTouchEnd={onMouseUp}
+                  onMouseDown={onMouseDown}
+                  onMouseUp={onMouseUp}
+                  mouseCoordinates={mouseCoordinates}
+                  progress={progress}
+                  playing={playing}
+                />
+                <Sequence
+                  images={imageData}
+                  rawImages={images}
+                  rawVRImages={vr_1}
+                  progress={progress}
+                  vr_1={vr_1Data}
+                  setEnded={setEnded}
+                />
+              </div>
+              <Content />
+            </>
           )}
         </Scene>
+        
       </Controller>
 
       {/* <div className={cx(s.text, s.bodyText, { [s.textHidden]: !vrEnded })}>

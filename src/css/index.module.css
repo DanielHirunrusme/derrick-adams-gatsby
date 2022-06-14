@@ -2,8 +2,10 @@
     position: relative;
     overflow-x: hidden;
     width: 100vw;
-    -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
 }
 
 
@@ -22,52 +24,6 @@
     height: 100%;
 }
 
-.buttonHolder {
-    position: fixed;
-    bottom: 60px;
-    width: 60px;
-    height: 60px;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 9999;
-
-}
-
-.button {
-    font-family: 'Karl', sans-serif;
-    width: 60px;
-    height: 60px;
-    background: #8B12DE;
-    border: none;
-    color: white;
-    cursor: pointer;
-    border-radius: 100%;
-    user-select: none;
-    outline: none;
-    transition: all .2s;
-    text-transform: uppercase;
-    /* font-weight: bold; */
-    font-size: 12px;
-    position: absolute;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%);
-}
-
-@media screen and (max-width: 768px) {
-    .buttonHolder {
-        bottom: 60px !important;
-        left: 50% !important;
-    }
-}
-
-.buttonPlaying {
-    cursor: none;
-    /* width: 54px !important; */
-    /* height: 54px !important; */
-    background-color: #8B12DE;
-    color: rgba(0, 0, 0, .2);
-}
 
 .button:hover {
     /* width: 105px; */
@@ -81,10 +37,10 @@
 
 .loader {
     position: absolute;
-    width: 75px !important;
-    height: 75px;
-    left: -7.5px;
-    top: -7.5px;
+    width: 92px !important;
+    height: 92px;
+    left: 0px;
+    top: 0px;
     pointer-events: none
 }
 
@@ -192,8 +148,8 @@
 
 
 .h1 {
-    font-size: 10vw;
-    letter-spacing: -.03em;
+    font-size: 10.15625vw;
+    letter-spacing: -.045em;
     line-height: 0;
     white-space: nowrap;
     margin-top: -1em;
@@ -203,43 +159,30 @@
 
 .header {
     position: fixed;
-    bottom: 40px;
-    left: 0;
-    width: 100%;
-    text-align: center;
+    top: 25px;
+    left: 30px;
+    width: calc(100% - 60px);
+    text-align: left;
     color: white;
     z-index: 99;
-    height: auto;
-    margin-top: 32px;
-    font-size: 20px;
+    /* font-size: 20px; */
     font-family: 'Karl', sans-serif;
-    display: flex;
-    justify-items: center;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
-    gap: 1rem;
 }
 
 .header a {
-    font-size: 12px;
     color: white;
-    text-decoration: none;
 }
 
 .external {
     position: absolute;
-     right: 0;
-     display: flex;
-     gap: 1.25rem;
-     margin-right: 50px;
-     font-size: 14px;
-}
-
-.bodyText {
-    font-family: 'Karl', sans-serif;
-    font-size: 12px;
-    letter-spacing: .02em;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0;
+    display: flex;
+    gap: 1.25rem;
+    font-size: 20px;
+        /* margin-right: 50px; */
+    /* font-size: 14px; */
 }
 
 .bodyTextUppercase {
@@ -318,7 +261,10 @@
 .authorText {
     transition: 0s all;
     transition-delay: .85s;
-    padding-top: 0.25em;
+    margin: 0;
+    padding: 0;
+   
+    /* padding-top: 0.25em; */
     display: block;
 }
 
@@ -327,18 +273,28 @@
 }
 
 @media screen and (min-width: 768px) {
+    .header {
+        position: fixed;
+        bottom: 40px;
+        left: 60px;
+        width: calc(100% - 120px);
+        text-align: left;
+        color: white;
+        z-index: 99;
+        top: auto;
+    }
+
+    .external {
+        font-size: 2.5vw;
+    }
 
     .h1 {
-        font-size: 9.875vw;
+        font-size: 10.15625vw;
         margin-top: -.1em;
     }
 
     .authorText {
-        /* padding-top: 1em; */
-    }
-
-    .bodyText {
-        font-size: 12px;
+        margin-top: -.5em;
     }
 
     .nav {

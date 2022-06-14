@@ -36,6 +36,8 @@
     "react-konva": "^18.1.1",
     "react-player": "^2.10.1",
     "react-scrollmagic": "^2.3.0",
+    "react-sparkle": "^1.0.9",
+    "react-sticky": "^6.0.3",
     "styled-components": "^5.3.5",
     "use-image": "^1.0.12"
   },

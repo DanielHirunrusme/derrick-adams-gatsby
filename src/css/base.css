@@ -1,13 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@900&display=swap');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css');
 
-body {
-    margin: 0;
-    overflow-x:hidden;
-    padding: 0;
-}
-
-
 @font-face {
     font-family: 'Aral-Type BQ';
     src: url('/fonts/Aral-TypeBQ-Bold.woff2') format('woff2'),
@@ -37,23 +30,88 @@ body {
 }
 
 
+body {
+    margin: 0;
+    overflow-x: hidden;
+    padding: 0;
+    font-size: 20px;
+    letter-spacing: -0.02em;
+    font-family: 'Karl';
+}
+
 
 .CircularProgressbar-trail {
-    stroke: #8B12DE !important;
+    stroke: #C09725 !important;
     transition: all .2s;
 }
 
 .CircularProgressbar .CircularProgressbar-path {
-    min-height:100%;
+    min-height: 100%;
     /* stroke: url(#gradientStroke) !important; */
-    stroke: #e1cd15 !important;
-     /* animation: a 2s linear infinite !important; */
+    stroke: #FFD600 !important;
+    /* animation: a 2s linear infinite !important; */
 }
 
 @keyframes a {
-    0% {stroke:#EAA3F8 !important;}
-    20%{stroke: #CD1318  !important; }
-    40%{stroke: #20A12E !important;}
-    60%{stroke: #1536AB !important;}
-    80%{stroke: #8B12DE !important;}
-  }
+    0% {
+        stroke: #EAA3F8 !important;
+    }
+
+    20% {
+        stroke: #CD1318 !important;
+    }
+
+    40% {
+        stroke: #20A12E !important;
+    }
+
+    60% {
+        stroke: #1536AB !important;
+    }
+
+    80% {
+        stroke: #8B12DE !important;
+    }
+}
+
+body,
+button,
+p,
+h2,
+h3,
+h4,
+h5,
+nav,
+a {
+    background: none;
+    border: none;
+    font-size: 20px;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+}
+
+
+@media screen and (min-width: 768px) {
+    body,
+    button,
+    p,
+    h2,
+    h3,
+    h4,
+    h5,
+    nav,
+    a {
+        font-size: 2.5vw;
+        letter-spacing: -0.02em;
+    }
+}
+
+button {
+    display: inline;
+}
+
+nav,
+nav * {
+    color: white;
+    font-family: 'Karl', sans-serif;
+}
