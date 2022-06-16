@@ -19,6 +19,7 @@
     "canvas": "^2.9.1",
     "classnames": "^2.3.1",
     "gatsby": "^4.16.0",
+    "gatsby-plugin-anchor-links": "^1.2.1",
     "gatsby-plugin-google-analytics": "^4.15.0",
     "gatsby-plugin-image": "^2.16.1",
     "gatsby-plugin-manifest": "^4.15.1",

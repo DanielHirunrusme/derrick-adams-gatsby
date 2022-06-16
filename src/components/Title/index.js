@@ -1,7 +1,6 @@
 import React from "react";
 import cx from "classnames";
 import * as s from "../../css/index.module.css";
-import scrollTo from "gatsby-plugin-smoothscroll";
 import { AnchorLink } from "gatsby-plugin-anchor-links";
 
 const Title = ({
@@ -13,7 +12,6 @@ const Title = ({
   ended,
 }) => {
   const anchorLinkClicked = (str) => {
-    // scrollTo(`#${str}`);
     setEnded(true);
   };
   return (
