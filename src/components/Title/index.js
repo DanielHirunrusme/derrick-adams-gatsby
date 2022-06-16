@@ -16,7 +16,7 @@ const Title = ({
   };
   return (
     <>
-      {sticky && <header
+      {sticky && !playing && <header
         className={cx(
           s.header,
           { [s.headerSticky]: ended },

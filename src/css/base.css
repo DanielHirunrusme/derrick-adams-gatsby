@@ -50,14 +50,14 @@ body::-webkit-scrollbar {
 
 
 .CircularProgressbar-trail {
-    stroke: #C09725 !important;
+    stroke: #694d00 !important;
     transition: all .2s;
 }
 
 .CircularProgressbar .CircularProgressbar-path {
     min-height: 100%;
     /* stroke: url(#gradientStroke) !important; */
-    stroke: #FFD600 !important;
+    stroke: #C09725 !important;
     /* animation: a 2s linear infinite !important; */
 }
 

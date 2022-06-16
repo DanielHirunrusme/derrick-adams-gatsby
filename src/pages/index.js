@@ -1,11 +1,13 @@
 import cx from "classnames";
 import React, { useState, useRef, useEffect } from "react";
+import useScrollPosition from '@react-hook/window-scroll'
 import Main from "../../static/main_trim_lores.mp4";
 import VR_1 from "../../static/vr_1_lores.mp4";
 import * as s from "../css/index.module.css";
 import Button from "../components/button";
 import { Controller, Scene } from "react-scrollmagic";
 import Sequence from "../components/Sequence";
+import CanvasSequence from "../components/CanvasSequence";
 import Content from "../components/Content";
 import Title from "../components/Title";
 import { graphql } from "gatsby"; // to query for image data
@@ -30,6 +32,7 @@ const sortStringInts = (array) => {
 export default function IndexPage({ data }) {
   // Refs
   const mainVideo = useRef();
+  const scrollY = useScrollPosition(60)
   // Scroll Direction
   const { scrollDirection, isScrolling, isScrollingUp, isScrollingDown } =
     useScrollDirection();
@@ -64,33 +67,35 @@ export default function IndexPage({ data }) {
     vr_1Data.push(`/vr_1/${i}.jpg`);
   }
 
-  useEffect(()=>{
-    if(typeof window){
-      useInterval(
-        () => {
-          // Your custom logic here
-          console.log("scroll up");
-          window.scrollBy(0, -60);
-          // console.log(window.scrollY)
-        },
-        // Delay in milliseconds or null to stop it
-        !playing && !ended && window.scrollY > 60 ? 30 : null
-      );
-    
-      useInterval(
-        () => {
-          // Your custom logic here
-          console.log("scroll down");
-          window.scrollBy(0, 60);
-          // console.log(window.scrollY)
-        },
-        // Delay in milliseconds or null to stop it
-        mouseDown && !ended ? 30 : null
-      );
-    }
-  }, [])
+  var allImages = [];
+  images.map((img)=>{
+    allImages.push(img.node.childImageSharp.gatsbyImageData.images.fallback.src)
+  });
+  vr_1.map((img)=>{
+    allImages.push(img.node.childImageSharp.gatsbyImageData.images.fallback.src)
+  });
 
-  
+  useInterval(
+    () => {
+      // Your custom logic here
+      console.log("scroll up");
+      window.scrollBy(0, -30);
+      // console.log(window.scrollY)
+    },
+    // Delay in milliseconds or null to stop it
+    !playing && !ended && scrollY > 30 ? 30 : null
+  );
+
+  useInterval(
+    () => {
+      // Your custom logic here
+      console.log("scroll down");
+      window.scrollBy(0, 30);
+      // console.log(window.scrollY)
+    },
+    // Delay in milliseconds or null to stop it
+    mouseDown && !ended ? 30 : null
+  );
 
   const onMainEnded = () => {
     // play random VR video
@@ -197,27 +202,6 @@ export default function IndexPage({ data }) {
     // setPlaying(false);
   };
 
-  // useEffect(() => {
-  //   if (typeof window) {
-  //     window.addEventListener("scroll", winScroll);
-  //   }
-  // }, []);
-
-  // useEffect(() => {
-  //   console.log("===========");
-  //   console.log("mouseDown", mouseDown);
-  //   console.log("isScrolling", isScrolling);
-  //   console.log("===========");
-
-  //   // User is just using scrollbar and not pressing down
-  //   if (!mouseDown && isScrolling && scrollDirection === "DOWN") {
-  //     clearAll();
-  //   }
-  //   // User quit pressing down and scrolling stopped
-  //   if (!mouseDown && !isScrolling && window.scrollY > 1) {
-  //     autoScrollUp();
-  //   }
-  // }, [isScrolling, mouseDown, scrollDirection]);
 
   useEffect(() => {
     if (!ended) {
@@ -239,10 +223,10 @@ export default function IndexPage({ data }) {
 
   return (
     <main onMouseMove={onMouseMove} className={s.main}>
-      {preloaded > 0 && <section className={s.preloader}>
+      {/* {preloaded > 0 && <section className={s.preloader}>
         Loading images: {preloaded}
-      </section>
-}
+      </section> */}
+
       <Controller>
         <Scene duration="4000%">
           {(progress) => {
@@ -267,7 +251,7 @@ export default function IndexPage({ data }) {
                     playing={playing}
                     ended={ended}
                   />
-                  <Sequence
+                  {/* <Sequence
                     images={imageData}
                     rawImages={images}
                     rawVRImages={vr_1}
@@ -276,7 +260,8 @@ export default function IndexPage({ data }) {
                     setEnded={setEnded}
                     setPreloaded={setPreloaded}
                     preloaded={preloaded}
-                  />
+                  /> */}
+                  <CanvasSequence totalLength={totalLength} setEnded={setEnded} index={index} images={allImages} style={{height: '1400px'}} />
                 </div>
                 <Content ended={ended} setEnded={setEnded} />
               </>
