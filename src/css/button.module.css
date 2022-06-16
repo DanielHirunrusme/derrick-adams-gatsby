@@ -1,6 +1,6 @@
 .root {
     position: fixed;
-    bottom: 40px;
+    bottom: 30px;
     width: 120px;
     left: 50%;
     transform: translateX(-50%);
@@ -11,7 +11,7 @@
 }
 
 .text {
-    padding-top: .5em;
+    padding-top: .75em;
     display: block;
 }
 
@@ -58,4 +58,17 @@
 
 .textPlaying {
     opacity: 0;
+}
+
+
+@media screen and (min-width: 768px) {
+    .root {
+        bottom: 35px;
+    }
+    .button {
+        bottom: 40px;
+    }
+    .text {
+        padding-top: .5em;
+    }
 }

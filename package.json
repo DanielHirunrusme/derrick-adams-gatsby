@@ -39,7 +39,8 @@
     "react-sparkle": "^1.0.9",
     "react-sticky": "^6.0.3",
     "styled-components": "^5.3.5",
-    "use-image": "^1.0.12"
+    "use-image": "^1.0.12",
+    "use-scroll-direction": "^1.1.4"
   },
   "devDependencies": {
     "prettier": "^2.6.2"

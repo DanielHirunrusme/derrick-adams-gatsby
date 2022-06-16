@@ -7,9 +7,16 @@ import Button from "../components/button";
 import { Controller, Scene } from "react-scrollmagic";
 import Sequence from "../components/Sequence";
 import Content from "../components/Content";
+import Title from "../components/Title";
 import { graphql } from "gatsby"; // to query for image data
 import { getImage } from "gatsby-plugin-image";
 import { Stage, Layer, Image as KonvaImage } from "react-konva";
+import { useScrollDirection } from "use-scroll-direction";
+import useInterval from "../utils/useInterval";
+
+const coreLength = 784;
+const vrLength = 444;
+const totalLength = coreLength + vrLength;
 
 const sortStringInts = (array) => {
   array.sort(function (a, b) {
@@ -23,7 +30,13 @@ const sortStringInts = (array) => {
 export default function IndexPage({ data }) {
   // Refs
   const mainVideo = useRef();
+  // Scroll Direction
+  const { scrollDirection, isScrolling, isScrollingUp, isScrollingDown } =
+    useScrollDirection();
+  //Preloader
+  const [preloaded, setPreloaded] = useState(totalLength);
   // States
+  const [mouseDown, setMouseDown] = useState(false);
   const [playing, setPlaying] = useState(false);
   const [ended, setEnded] = useState(false);
   const [currentTime, setCurrentTime] = useState(false);
@@ -51,6 +64,34 @@ export default function IndexPage({ data }) {
     vr_1Data.push(`/vr_1/${i}.jpg`);
   }
 
+  useEffect(()=>{
+    if(typeof window){
+      useInterval(
+        () => {
+          // Your custom logic here
+          console.log("scroll up");
+          window.scrollBy(0, -60);
+          // console.log(window.scrollY)
+        },
+        // Delay in milliseconds or null to stop it
+        !playing && !ended && window.scrollY > 60 ? 30 : null
+      );
+    
+      useInterval(
+        () => {
+          // Your custom logic here
+          console.log("scroll down");
+          window.scrollBy(0, 60);
+          // console.log(window.scrollY)
+        },
+        // Delay in milliseconds or null to stop it
+        mouseDown && !ended ? 30 : null
+      );
+    }
+  }, [])
+
+  
+
   const onMainEnded = () => {
     // play random VR video
     console.log("mainEnded");
@@ -61,44 +102,33 @@ export default function IndexPage({ data }) {
 
   const onMouseDown = () => {
     setPlaying(true);
+    setMouseDown(true);
     setTitle(false);
-    autoScroll();
+    // autoScroll();
   };
 
   const autoScroll = () => {
-    if (intervalId) {
-      clearInterval(intervalId);
-      setIntervalId(0);
-    }
-
-    setIntervalId(
-      setInterval(() => {
-        if (!ended) {
-          window.scrollBy(0, 60);
-        } else {
-          setPlaying(false);
-          clearInterval(intervalId);
-        }
-      }, 30)
-    );
+    // if (intervalId) {
+    //   clearInterval(intervalId);
+    //   setIntervalId(0);
+    // }
+    // setIntervalId(
+    //   setInterval(() => {
+    //     console.log("tick down");
+    //     if (!ended) {
+    //       window.scrollBy(0, 60);
+    //     } else {
+    //       setPlaying(false);
+    //       clearInterval(intervalId);
+    //     }
+    //   }, 30)
+    // );
   };
 
   const onMouseUp = () => {
+    setMouseDown(false);
     if (!ended) {
       setPlaying(false);
-      if (intervalId) {
-        clearInterval(intervalId);
-        setIntervalId(0);
-      }
-      setIntervalId(
-        setInterval(() => {
-          if (window.scrollY <= 0) {
-            setTitle(true);
-            clearInterval(intervalId);
-          }
-          window.scrollBy(0, -60);
-        }, 30)
-      );
     }
   };
 
@@ -118,92 +148,141 @@ export default function IndexPage({ data }) {
     e.preventDefault();
     setEnded(true);
     setPlaying(true);
-    if(typeof window) {
-      let offset = document.getElementById('About').offsetTop - window.innerHeight/2;
+    if (typeof window) {
+      let offset =
+        document.getElementById("About").offsetTop - window.innerHeight / 2;
       window.scrollTo({
         top: offset,
         left: 0,
-        behavior: 'smooth'
-      })
+        behavior: "smooth",
+      });
     }
+  };
 
-  }
+  const winScroll = () => {
+    // console.log('mouseDown', mouseDown)
+  };
+
+  const autoScrollUp = () => {
+    // console.log("autoScrollUp");
+    // //clear any current intervals
+    // if (intervalId) {
+    //   clearInterval(intervalId);
+    //   setIntervalId(0);
+    // }
+    // // set new interval
+    // setIntervalId(
+    //   setInterval(() => {
+    //     console.log("tick up");
+    //     console.log("isScrolling", isScrolling);
+    //     if (
+    //       (scrollDirection === "NONE" || scrollDirection === "UP") &&
+    //       !isScrolling &&
+    //       window.scrollY > 0
+    //     ) {
+    //       window.scrollBy(0, -60);
+    //     } else {
+    //       clearAll();
+    //     }
+    //   }, 30)
+    // );
+  };
+
+  const clearAll = () => {
+    console.log("clearAll");
+    clearInterval(intervalId);
+    setIntervalId(0);
+    // console.log('clear all');
+    // setMouseDown(false);
+    // setPlaying(false);
+  };
+
+  // useEffect(() => {
+  //   if (typeof window) {
+  //     window.addEventListener("scroll", winScroll);
+  //   }
+  // }, []);
+
+  // useEffect(() => {
+  //   console.log("===========");
+  //   console.log("mouseDown", mouseDown);
+  //   console.log("isScrolling", isScrolling);
+  //   console.log("===========");
+
+  //   // User is just using scrollbar and not pressing down
+  //   if (!mouseDown && isScrolling && scrollDirection === "DOWN") {
+  //     clearAll();
+  //   }
+  //   // User quit pressing down and scrolling stopped
+  //   if (!mouseDown && !isScrolling && window.scrollY > 1) {
+  //     autoScrollUp();
+  //   }
+  // }, [isScrolling, mouseDown, scrollDirection]);
+
+  useEffect(() => {
+    if (!ended) {
+      switch (scrollDirection) {
+        case "DOWN":
+          setPlaying(true);
+          break;
+        case "UP":
+          setPlaying(false);
+          break;
+        case "NONE":
+          setPlaying(false);
+          break;
+      }
+    } else {
+      setPlaying(false);
+    }
+  }, [scrollDirection]);
 
   return (
     <main onMouseMove={onMouseMove} className={s.main}>
-      {!playing && (
-        <header className={s.header}>
-          <nav>
-            <a  href="#about">About</a>,&nbsp;
-            <a href="#gallery">Gallery</a>,&nbsp;
-            <a href="#purchase">Purchase</a>
-          </nav>
-          {/* <a href="" className={s.bodyTextUppercase}>
-            Inquire
-          </a> */}
-          <div className={s.external}>
-            <a href="https://www.instagram.com/derrickadamsny" target="blank"><i className="fa-brands fa-instagram"></i></a>
-            {/* <i class="fa-regular fa-envelope"></i> */}
-          </div>
-        </header>
-      )}
-      <div className={cx(s.title, { [s.titleHidden]: !title })}>
-        <div>
-          <h1 className={cx(s.h1, { [s.h1Hidden]: playing })}>
-            <span style={{ color: "#F395C7" }}>F</span>
-            <span style={{ color: "#6A03A7" }}>U</span>
-            <span style={{ color: "#016EB3" }}>N</span>
-            <span style={{ color: "#00B242" }}>T</span>
-            <span style={{ color: "#FFD600" }}>I</span>
-            <span style={{ color: "#FF6B15" }}>M</span>
-            <span style={{ color: "#E13E53" }}>E</span>
-            <span>&nbsp;</span>
-            <span style={{ color: "#F395C7" }}>U</span>
-            <span style={{ color: "#6A03A7" }}>N</span>
-            <span style={{ color: "#016EB3" }}>I</span>
-            <span style={{ color: "#00B242" }}>C</span>
-            <span style={{ color: "#FFD600" }}>O</span>
-            <span style={{ color: "#FF6B15" }}>R</span>
-            <span style={{ color: "#E13E53" }}>N</span>
-          </h1>
-          <p
-            className={cx(s.authorText, {
-              [s.authorTextHidden]: playing,
-            })}
-          >
-            by Derrick Adams
-          </p>
-        </div>
-      </div>
-
+      {preloaded > 0 && <section className={s.preloader}>
+        Loading images: {preloaded}
+      </section>
+}
       <Controller>
-        <Scene duration="4000%" triggerHook="onLeave" pin>
-          {(progress) => (
-            <>
-              <div style={{ height: "4000vh", position: "relative" }}>
-                <Button
-                  onTouchStart={onMouseDown}
-                  onTouchEnd={onMouseUp}
-                  onMouseDown={onMouseDown}
-                  onMouseUp={onMouseUp}
-                  mouseCoordinates={mouseCoordinates}
-                  progress={progress}
-                  playing={playing}
-                />
-                <Sequence
-                  images={imageData}
-                  rawImages={images}
-                  rawVRImages={vr_1}
-                  progress={progress}
-                  vr_1={vr_1Data}
-                  setEnded={setEnded}
-                />
-              </div>
-              <Content />
-            </>
-          )}
+        <Scene duration="4000%">
+          {(progress) => {
+            let index = Math.round(progress * 1 * totalLength);
+            return (
+              <>
+                <div style={{ height: "4000vh", position: "relative" }}>
+                  <Title
+                    playing={playing}
+                    setEnded={setEnded}
+                    ended={ended}
+                    progress={progress}
+                    index={index}
+                  />
+                  <Button
+                    onTouchStart={onMouseDown}
+                    onTouchEnd={onMouseUp}
+                    onMouseDown={onMouseDown}
+                    onMouseUp={onMouseUp}
+                    mouseCoordinates={mouseCoordinates}
+                    progress={progress}
+                    playing={playing}
+                    ended={ended}
+                  />
+                  <Sequence
+                    images={imageData}
+                    rawImages={images}
+                    rawVRImages={vr_1}
+                    progress={progress}
+                    vr_1={vr_1Data}
+                    setEnded={setEnded}
+                    setPreloaded={setPreloaded}
+                    preloaded={preloaded}
+                  />
+                </div>
+                <Content ended={ended} setEnded={setEnded} />
+              </>
+            );
+          }}
         </Scene>
-        
       </Controller>
 
       {/* <div className={cx(s.text, s.bodyText, { [s.textHidden]: !vrEnded })}>

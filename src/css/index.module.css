@@ -44,6 +44,10 @@
     pointer-events: none
 }
 
+.hidden {
+    opacity: 0 !important;
+}
+
 
 .title {
     font-family: 'Karl', sans-serif;
@@ -62,6 +66,14 @@
     transition-delay: 2s;
     text-align: center;
     pointer-events: none;
+}
+
+.titleContent {
+    position: fixed;
+    pointer-events: none;
+    mix-blend-mode: multiply;
+    height: 100vh;
+    color: black;
 }
 
 .h1 span {
@@ -159,18 +171,62 @@
 
 .header {
     position: fixed;
-    top: 25px;
-    left: 30px;
-    width: calc(100% - 60px);
+    top: 0px;
+    left: 0px;
+    width: 100%;
     text-align: left;
     color: white;
-    z-index: 99;
+    z-index: 9999;
     /* font-size: 20px; */
     font-family: 'Karl', sans-serif;
 }
 
-.header a {
+.headerInner {
+    padding: 25px 0;
+}
+
+.headerSticky {
+    /* position: sticky; */
+    top: 0;
+    background: white;
+    color: black;
+}
+
+.headerSticky a, .headerSticky i {
+    color: black;
+}
+
+.headerHidden {
+    display: none;
+}
+
+.header a, .header button {
     color: white;
+}
+
+.headerSticky, .headerSticky a {
+    /* margin-top: 25px; */
+    color: black;
+}
+
+.headerSticky::before {
+    content: '';
+    position: absolute;
+    left: 30px;
+    bottom: 0;
+    height: 3px;
+    background: black;
+    border-radius: 6px;
+    width: calc(100% - 60px);
+}
+
+.headerSticky nav {
+    color: black;
+}
+
+.header button {
+    padding: 0;
+    margin: 0;
 }
 
 .external {
@@ -272,16 +328,46 @@
     opacity: 0;
 }
 
+.headerInner {
+    margin: 0 30px;
+    position: relative;
+}
+
+.preloader {
+    background: black;
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 999999;
+}
+
 @media screen and (min-width: 768px) {
+    .headerSticky::before {
+        bottom: 'auto';
+        top: 0;
+    }
+
     .header {
         position: fixed;
-        bottom: 40px;
-        left: 60px;
-        width: calc(100% - 120px);
+        bottom: 0px;
+        padding-bottom: 10px;
+        padding-top: 15px;
+        left: 0px;
         text-align: left;
         color: white;
-        z-index: 99;
         top: auto;
+    }
+
+    .headerSticky::before {
+        left: 60px;
+        width: calc(100% - 120px);
+    }
+
+    .headerInner {
+        margin: 0 60px;
     }
 
     .external {
@@ -294,7 +380,7 @@
     }
 
     .authorText {
-        margin-top: -.5em;
+        margin-top: -1.125em;
     }
 
     .nav {

@@ -6,6 +6,12 @@ module.exports = {
   plugins: [
     "gatsby-plugin-styled-components",
     {
+      resolve: "gatsby-plugin-anchor-links",
+      options: {
+        duration: 2000
+      }
+    },
+    {
       resolve: "gatsby-plugin-google-analytics",
       options: {
         trackingId: "G-YXBVEW33ND",

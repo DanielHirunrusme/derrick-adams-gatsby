@@ -39,6 +39,15 @@ body {
     font-family: 'Karl';
 }
 
+.small {
+    font-size: 14px;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+
 
 .CircularProgressbar-trail {
     stroke: #C09725 !important;
@@ -114,4 +123,14 @@ nav,
 nav * {
     color: white;
     font-family: 'Karl', sans-serif;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+ul li {
+    margin-bottom: 1em;
+    list-style: none;
 }

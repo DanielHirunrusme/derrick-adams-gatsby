@@ -16,6 +16,8 @@ const ImageSequence = ({
   rawImages,
   rawVRImages,
   setEnded,
+  setPreloaded,
+  preloaded,
 }) => {
   const [loaded, setLoaded] = useState(false);
   const [image, setImage] = React.useState([]);
@@ -25,17 +27,26 @@ const ImageSequence = ({
   const [scroll, setScroll] = useState(Math.floor(progress * totalLength));
 
   useEffect(() => {
-    console.log('index', index)
-    console.log('coreLength + vrLength', coreLength + vrLength)
-    if (index === coreLength + vrLength ) {
-      console.log('set ended true')
+    if (index >= coreLength + vrLength - 1) {
       setEnded(true);
+    } else {
+      setEnded(false);
     }
   }, [progress]);
 
+  const reducePreloader = () => {
+    // console.log('reduce preloader')
+    setPreloaded(preloaded--);
+  }
+
+  useEffect(()=>{
+    console.log('totalLength - preloaded', totalLength - preloaded)
+    // console.log('preloaded', preloaded)
+  }, [preloaded])
+
   if (rawImages) {
     return (
-      <div style={{ position: "fixed", width: "100vw", height: "100vh"}}>
+      <div style={{ position: "fixed", width: "100vw", height: "100vh" }}>
         {rawImages?.map((image, i) => {
           let img = getImage(image.node.childImageSharp.gatsbyImageData);
           return (
@@ -54,7 +65,8 @@ const ImageSequence = ({
                 objectFit="cover"
                 objectPosition="center"
                 image={img}
-                loading="eager"
+                loading={"eager"}
+                onLoad={reducePreloader}
                 alt="Funtime Unicorn"
                 style={{
                   height: "100vh",
@@ -82,6 +94,7 @@ const ImageSequence = ({
                 objectPosition="center"
                 image={img}
                 loading="eager"
+                onLoad={reducePreloader}
                 alt="Funtime Unicorn"
                 style={{
                   height: "100%",

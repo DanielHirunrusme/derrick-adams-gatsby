@@ -14,7 +14,11 @@ const Button = ({
   playing,
   vrEnded,
   mouseCoordinates,
+  ended
 }) => {
+  const [sparkleCount, setSparkleCount] = useState(6);
+  const [sparkleSpeed, setSparkleSpeed] = useState(20);
+
   const coreLength = 784;
   const vrLength = 444;
   const totalLength = coreLength + vrLength;
@@ -22,24 +26,23 @@ const Button = ({
     Math.floor(progress * totalLength) > 0
       ? Math.floor(progress * totalLength)
       : 0;
-  const [rotate, setRotate] = useState(45);
-  let gradientTransform = `rotate(${rotate})`;
 
   useEffect(() => {
-    setInterval(() => {
-      setRotate(rotate + 1);
-    }, 100);
-  }, []);
+    playing ? setSparkleCount(32) : setSparkleCount(6);
+    playing ? setSparkleSpeed(40) : setSparkleSpeed(20);
+
+  }, [playing]);
+  if(!ended) {
   return (
-    <div  onTouchStart={onTouchStart}
-    onTouchEnd={onTouchEnd}
-    onMouseDown={onMouseDown}
-    onMouseUp={onMouseUp} className={s.root}>
+    <div
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
+      onMouseDown={onMouseDown}
+      onMouseUp={onMouseUp}
+      className={s.root}
+    >
       <div className={s.buttonHolder}>
-        <button
-         
-          className={cx(s.button, { [s.buttonPlaying]: playing })}
-        />
+        <button className={cx(s.button, { [s.buttonPlaying]: playing })} />
         <CircularProgressbar
           className={s.loader}
           strokeWidth={playing ? 4 : 4}
@@ -47,19 +50,21 @@ const Button = ({
           maxValue={totalLength}
         />
         <Sparkles
-          color={"#F2F1EF"}
-          flicker={false}
-          fadeOutSpeed={40}
-          count={16}
-          minSize={4}
-          maxSize={8}
-        />
+            color={"#F2F1EF"}
+            flicker={false}
+            fadeOutSpeed={sparkleSpeed}
+            count={sparkleCount}
+            minSize={4}
+            maxSize={8}
+          />
       </div>
       <span className={cx(s.text, { [s.textPlaying]: playing })}>
         {!vrEnded ? "Play" : "Replay?"}
       </span>
     </div>
-  );
+  ) } else {
+    return <></>
+  }
 };
 
 export default Button;
