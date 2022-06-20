@@ -1,8 +1,6 @@
 import cx from "classnames";
 import React, { useState, useRef, useEffect } from "react";
 import useScrollPosition from '@react-hook/window-scroll'
-import Main from "../../static/main_trim_lores.mp4";
-import VR_1 from "../../static/vr_1_lores.mp4";
 import * as s from "../css/index.module.css";
 import Button from "../components/button";
 import { Controller, Scene } from "react-scrollmagic";
