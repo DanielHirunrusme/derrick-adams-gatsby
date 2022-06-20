@@ -19,8 +19,8 @@ const Button = ({
   const [sparkleCount, setSparkleCount] = useState(6);
   const [sparkleSpeed, setSparkleSpeed] = useState(20);
 
-  const coreLength = 784;
-  const vrLength = 444;
+  const coreLength = 799;
+  const vrLength = 354;
   const totalLength = coreLength + vrLength;
   const percent =
     Math.floor(progress * totalLength) > 0

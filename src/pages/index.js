@@ -16,8 +16,8 @@ import { Stage, Layer, Image as KonvaImage } from "react-konva";
 import { useScrollDirection } from "use-scroll-direction";
 import useInterval from "../utils/useInterval";
 
-const coreLength = 784;
-const vrLength = 444;
+const coreLength = 799;
+const vrLength = 354;
 const totalLength = coreLength + vrLength;
 
 const sortStringInts = (array) => {
@@ -55,30 +55,35 @@ export default function IndexPage({ data }) {
 
   const images = sortStringInts(data?.core?.edges);
   const vr_1 = sortStringInts(data?.vr_1?.edges);
-  // const imageData = images?.map((img) => getImage(img.node));
+
 
   var imageData = [];
-  for (let i = 1; i < 785; i++) {
+  for (let i = 1; i < coreLength; i++) {
     imageData.push(`/frames/${i}.jpg`);
   }
 
   var vr_1Data = [];
-  for (let i = 1; i < 444; i++) {
+  for (let i = 1; i < vrLength; i++) {
     vr_1Data.push(`/vr_1/${i}.jpg`);
   }
 
   var allImages = [];
   images.map((img)=>{
-    allImages.push(img.node.childImageSharp.gatsbyImageData.images.fallback.src)
+    allImages.push(img.node.publicURL)
+    // allImages.push(img.node.childImageSharp.gatsbyImageData.images.fallback.src)
   });
   vr_1.map((img)=>{
-    allImages.push(img.node.childImageSharp.gatsbyImageData.images.fallback.src)
+    allImages.push(img.node.publicURL)
+    // allImages.push(img.node.childImageSharp.gatsbyImageData.images.fallback.src)
   });
+
+
+  console.log(images);
+
 
   useInterval(
     () => {
       // Your custom logic here
-      console.log("scroll up");
       window.scrollBy(0, -30);
       // console.log(window.scrollY)
     },
@@ -325,7 +330,14 @@ export const query = graphql`
           base
           publicURL
           childImageSharp {
-            gatsbyImageData
+            gatsbyImageData(
+              width: 1280
+              height: 720
+              quality: 100
+              formats: [AUTO, WEBP]
+              blurredOptions: { width: 100, toFormat: JPG }
+              placeholder: BLURRED
+            )
           }
         }
       }
@@ -338,7 +350,10 @@ export const query = graphql`
           publicURL
           childImageSharp {
             gatsbyImageData(
-              width: 1000
+              quality: 100
+              formats: [AUTO, WEBP]
+              width: 1280
+              height: 720
               blurredOptions: { width: 100, toFormat: JPG }
               placeholder: BLURRED
             )

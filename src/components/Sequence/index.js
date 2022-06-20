@@ -6,8 +6,8 @@ import useImage from "use-image";
 import { src } from "prettier";
 import * as s from "../../css/index.module.css";
 
-const coreLength = 784;
-const vrLength = 444;
+const coreLength = 799;
+const vrLength = 354;
 
 const ImageSequence = ({
   progress,
@@ -40,7 +40,7 @@ const ImageSequence = ({
   }
 
   useEffect(()=>{
-    console.log('totalLength - preloaded', totalLength - preloaded)
+    // console.log('totalLength - preloaded', totalLength - preloaded)
     // console.log('preloaded', preloaded)
   }, [preloaded])
 

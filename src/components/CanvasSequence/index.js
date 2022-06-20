@@ -37,7 +37,7 @@ const CanvasSequence = ({
   };
 
   function draw() {
-    console.log("index", index);
+    // console.log("index", index);
     if (canvasRef?.current?.getContext("2d")) {
         // const val = ~~spring.get();
       const ctx = canvasRef.current.getContext("2d");
