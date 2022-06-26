@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import { useSpring, config } from "react-spring";
 import { drawImageCover, createLoadingQueue } from "../../lib/utils";
+import { TOTAL_COUNT } from "../../utils/settings";
 
 const CanvasSequence = ({
   children,
@@ -11,7 +12,6 @@ const CanvasSequence = ({
   style,
   index,
   setEnded,
-  totalLength,
   ...rest
 }) => {
   const loadingQueue = useRef(
@@ -112,7 +112,7 @@ const CanvasSequence = ({
 
   useEffect(()=>{
     draw();
-    if(index >= totalLength) {
+    if(index >= TOTAL_COUNT) {
         setEnded(true);
     } else {
         setEnded(false);

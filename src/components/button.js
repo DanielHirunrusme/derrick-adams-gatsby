@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import Sparkles from "react-sparkle";
+import { TOTAL_COUNT } from "../utils/settings";
 
 const Button = ({
   progress,
@@ -19,12 +20,9 @@ const Button = ({
   const [sparkleCount, setSparkleCount] = useState(6);
   const [sparkleSpeed, setSparkleSpeed] = useState(20);
 
-  const coreLength = 799;
-  const vrLength = 354;
-  const totalLength = coreLength + vrLength;
   const percent =
-    Math.floor(progress * totalLength) > 0
-      ? Math.floor(progress * totalLength)
+    Math.floor(progress * TOTAL_COUNT) > 0
+      ? Math.floor(progress * TOTAL_COUNT)
       : 0;
 
   useEffect(() => {
@@ -47,7 +45,7 @@ const Button = ({
           className={s.loader}
           strokeWidth={playing ? 4 : 4}
           value={percent}
-          maxValue={totalLength}
+          maxValue={TOTAL_COUNT}
         />
         <Sparkles
             color={"#F2F1EF"}

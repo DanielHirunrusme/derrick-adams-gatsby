@@ -13,10 +13,8 @@ import { getImage } from "gatsby-plugin-image";
 import { Stage, Layer, Image as KonvaImage } from "react-konva";
 import { useScrollDirection } from "use-scroll-direction";
 import useInterval from "../utils/useInterval";
+import { MAIN_COUNT, VR_COUNT, TOTAL_COUNT } from "../utils/settings";
 
-const coreLength = 799;
-const vrLength = 354;
-const totalLength = coreLength + vrLength;
 
 const sortStringInts = (array) => {
   array.sort(function (a, b) {
@@ -35,7 +33,7 @@ export default function IndexPage({ data }) {
   const { scrollDirection, isScrolling, isScrollingUp, isScrollingDown } =
     useScrollDirection();
   //Preloader
-  const [preloaded, setPreloaded] = useState(totalLength);
+  const [preloaded, setPreloaded] = useState(TOTAL_COUNT);
   // States
   const [mouseDown, setMouseDown] = useState(false);
   const [playing, setPlaying] = useState(false);
@@ -56,13 +54,13 @@ export default function IndexPage({ data }) {
 
 
   var imageData = [];
-  for (let i = 1; i < coreLength; i++) {
-    imageData.push(`/frames/${i}.jpg`);
+  for (let i = 1; i < MAIN_COUNT; i++) {
+    imageData.push(`/main/${i}.jpg`);
   }
 
   var vr_1Data = [];
-  for (let i = 1; i < vrLength; i++) {
-    vr_1Data.push(`/vr_1/${i}.jpg`);
+  for (let i = 1; i < VR_COUNT; i++) {
+    vr_1Data.push(`/park/${i}.jpg`);
   }
 
   var allImages = [];
@@ -76,7 +74,7 @@ export default function IndexPage({ data }) {
   });
 
 
-  console.log(images);
+  // console.log(images);
 
 
   useInterval(
@@ -92,7 +90,7 @@ export default function IndexPage({ data }) {
   useInterval(
     () => {
       // Your custom logic here
-      console.log("scroll down");
+      // console.log("scroll down");
       window.scrollBy(0, 30);
       // console.log(window.scrollY)
     },
@@ -102,7 +100,7 @@ export default function IndexPage({ data }) {
 
   const onMainEnded = () => {
     // play random VR video
-    console.log("mainEnded");
+    // console.log("mainEnded");
     setMainEnded(true);
   };
 
@@ -197,7 +195,7 @@ export default function IndexPage({ data }) {
   };
 
   const clearAll = () => {
-    console.log("clearAll");
+    // console.log("clearAll");
     clearInterval(intervalId);
     setIntervalId(0);
     // console.log('clear all');
@@ -233,7 +231,7 @@ export default function IndexPage({ data }) {
       <Controller>
         <Scene duration="4000%">
           {(progress) => {
-            let index = Math.round(progress * 1 * totalLength);
+            let index = Math.round(progress * 1 * TOTAL_COUNT);
             return (
               <>
                 <div style={{ height: "4000vh", position: "relative" }}>
@@ -264,7 +262,7 @@ export default function IndexPage({ data }) {
                     setPreloaded={setPreloaded}
                     preloaded={preloaded}
                   /> */}
-                  <CanvasSequence totalLength={totalLength} setEnded={setEnded} index={index} images={allImages} style={{height: '1400px'}} />
+                  <CanvasSequence setEnded={setEnded} index={index} images={allImages} style={{height: '1400px'}} />
                 </div>
                 <Content ended={ended} setEnded={setEnded} />
               </>
@@ -321,7 +319,7 @@ export default function IndexPage({ data }) {
 
 export const query = graphql`
   query {
-    core: allFile(filter: { relativeDirectory: { in: "frames" } }) {
+    core: allFile(filter: { relativeDirectory: { in: "main" } }) {
       edges {
         node {
           id
@@ -340,7 +338,26 @@ export const query = graphql`
         }
       }
     }
-    vr_1: allFile(filter: { relativeDirectory: { in: "vr_1" } }) {
+    vr_2: allFile(filter: { relativeDirectory: { in: "park" } }) {
+      edges {
+        node {
+          id
+          base
+          publicURL
+          childImageSharp {
+            gatsbyImageData(
+              quality: 100
+              formats: [AUTO, WEBP]
+              width: 1280
+              height: 720
+              blurredOptions: { width: 100, toFormat: JPG }
+              placeholder: BLURRED
+            )
+          }
+        }
+      }
+    }
+    vr_1: allFile(filter: { relativeDirectory: { in: "beach" } }) {
       edges {
         node {
           id

@@ -5,9 +5,7 @@ import { Stage, Layer, Image as KonvaImage } from "react-konva";
 import useImage from "use-image";
 import { src } from "prettier";
 import * as s from "../../css/index.module.css";
-
-const coreLength = 799;
-const vrLength = 354;
+import { TOTAL_COUNT, MAIN_COUNT } from "../../utils/settings";
 
 const ImageSequence = ({
   progress,
@@ -22,12 +20,11 @@ const ImageSequence = ({
   const [loaded, setLoaded] = useState(false);
   const [image, setImage] = React.useState([]);
 
-  const totalLength = coreLength + vrLength;
-  let index = Math.round(progress * 1 * totalLength);
-  const [scroll, setScroll] = useState(Math.floor(progress * totalLength));
+  let index = Math.round(progress * 1 * TOTAL_COUNT);
+  const [scroll, setScroll] = useState(Math.floor(progress * TOTAL_COUNT));
 
   useEffect(() => {
-    if (index >= coreLength + vrLength - 1) {
+    if (index >= TOTAL_COUNT - 10) {
       setEnded(true);
     } else {
       setEnded(false);
@@ -39,10 +36,6 @@ const ImageSequence = ({
     setPreloaded(preloaded--);
   }
 
-  useEffect(()=>{
-    // console.log('totalLength - preloaded', totalLength - preloaded)
-    // console.log('preloaded', preloaded)
-  }, [preloaded])
 
   if (rawImages) {
     return (
@@ -82,7 +75,7 @@ const ImageSequence = ({
             <div
               key={`vr-${i}`}
               style={{
-                display: i + coreLength !== index ? "none" : "block",
+                display: i + MAIN_COUNT !== index ? "none" : "block",
                 height: "100%",
                 width: "100%",
                 position: "absolute",
