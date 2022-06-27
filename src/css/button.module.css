@@ -7,13 +7,24 @@
     z-index: 9999;
     color: white;
     text-align: center;
+    cursor: pointer;
     /* font-family: 'Karl', sans-serif; */
+}
+
+.root .text {
+    /* border-bottom: .12em solid transparent; */
+    /* margin-bottom: -.12em; */
+}
+
+.root:hover .text {
+    /* border-bottom: .12em solid; */
 }
 
 .text {
     padding-top: .75em;
-    display: block;
+    display: inline-block;
 }
+
 
 .buttonHolder {
     position: relative;

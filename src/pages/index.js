@@ -1,6 +1,6 @@
 import cx from "classnames";
 import React, { useState, useRef, useEffect } from "react";
-import useScrollPosition from '@react-hook/window-scroll'
+import useScrollPosition from "@react-hook/window-scroll";
 import * as s from "../css/index.module.css";
 import Button from "../components/button";
 import { Controller, Scene } from "react-scrollmagic";
@@ -15,7 +15,6 @@ import { useScrollDirection } from "use-scroll-direction";
 import useInterval from "../utils/useInterval";
 import { MAIN_COUNT, VR_COUNT, TOTAL_COUNT } from "../utils/settings";
 
-
 const sortStringInts = (array) => {
   array.sort(function (a, b) {
     let aBase = a.node.base.split(".jpg")[0];
@@ -25,10 +24,14 @@ const sortStringInts = (array) => {
   return array;
 };
 
+const getRandomVR = () => {
+  return Math.floor(Math.random() * (3 - 1));
+};
+
 export default function IndexPage({ data }) {
   // Refs
   const mainVideo = useRef();
-  const scrollY = useScrollPosition(60)
+  const scrollY = useScrollPosition(60);
   // Scroll Direction
   const { scrollDirection, isScrolling, isScrollingUp, isScrollingDown } =
     useScrollDirection();
@@ -44,38 +47,41 @@ export default function IndexPage({ data }) {
   const [mainEnded, setMainEnded] = useState(false);
   const [vrEnded, setVrEnded] = useState(false);
   const [intervalId, setIntervalId] = useState(null);
+  const [allImages, setAllImages] = useState([]);
   const [mouseCoordinates, setMouseCoordinates] = useState({
     x: null,
     y: null,
   });
 
-  const images = sortStringInts(data?.core?.edges);
-  const vr_1 = sortStringInts(data?.vr_1?.edges);
+  const getRandVR = () => {
+    let num = Math.floor(Math.random() * (4 - 1) + 1);
 
+    switch (num) {
+      case 1:
+        return sortStringInts(data?.vr_1?.edges);
+        break;
 
-  var imageData = [];
-  for (let i = 1; i < MAIN_COUNT; i++) {
-    imageData.push(`/main/${i}.jpg`);
-  }
+      case 2:
+        return sortStringInts(data?.vr_2?.edges);
+        break;
 
-  var vr_1Data = [];
-  for (let i = 1; i < VR_COUNT; i++) {
-    vr_1Data.push(`/park/${i}.jpg`);
-  }
+      case 3:
+        return sortStringInts(data?.vr_3?.edges);
+        break;
+    }
+  };
 
-  var allImages = [];
-  images.map((img)=>{
-    allImages.push(img.node.publicURL)
-    // allImages.push(img.node.childImageSharp.gatsbyImageData.images.fallback.src)
-  });
-  vr_1.map((img)=>{
-    allImages.push(img.node.publicURL)
-    // allImages.push(img.node.childImageSharp.gatsbyImageData.images.fallback.src)
-  });
-
-
-  // console.log(images);
-
+  useEffect(() => {
+    const images = sortStringInts(data?.core?.edges);
+    const vr = getRandVR();
+  
+    images.map((img) => {
+      setAllImages(allImages.push(img.node.publicURL));
+    });
+    vr.map((img) => {
+      setAllImages(allImages.push(img.node.publicURL));
+    });
+  }, [])
 
   useInterval(
     () => {
@@ -89,10 +95,7 @@ export default function IndexPage({ data }) {
 
   useInterval(
     () => {
-      // Your custom logic here
-      // console.log("scroll down");
       window.scrollBy(0, 30);
-      // console.log(window.scrollY)
     },
     // Delay in milliseconds or null to stop it
     mouseDown && !ended ? 30 : null
@@ -100,35 +103,13 @@ export default function IndexPage({ data }) {
 
   const onMainEnded = () => {
     // play random VR video
-    // console.log("mainEnded");
     setMainEnded(true);
   };
-
-  const onClick = () => {};
 
   const onMouseDown = () => {
     setPlaying(true);
     setMouseDown(true);
     setTitle(false);
-    // autoScroll();
-  };
-
-  const autoScroll = () => {
-    // if (intervalId) {
-    //   clearInterval(intervalId);
-    //   setIntervalId(0);
-    // }
-    // setIntervalId(
-    //   setInterval(() => {
-    //     console.log("tick down");
-    //     if (!ended) {
-    //       window.scrollBy(0, 60);
-    //     } else {
-    //       setPlaying(false);
-    //       clearInterval(intervalId);
-    //     }
-    //   }, 30)
-    // );
   };
 
   const onMouseUp = () => {
@@ -165,44 +146,11 @@ export default function IndexPage({ data }) {
     }
   };
 
-  const winScroll = () => {
-    // console.log('mouseDown', mouseDown)
-  };
-
-  const autoScrollUp = () => {
-    // console.log("autoScrollUp");
-    // //clear any current intervals
-    // if (intervalId) {
-    //   clearInterval(intervalId);
-    //   setIntervalId(0);
-    // }
-    // // set new interval
-    // setIntervalId(
-    //   setInterval(() => {
-    //     console.log("tick up");
-    //     console.log("isScrolling", isScrolling);
-    //     if (
-    //       (scrollDirection === "NONE" || scrollDirection === "UP") &&
-    //       !isScrolling &&
-    //       window.scrollY > 0
-    //     ) {
-    //       window.scrollBy(0, -60);
-    //     } else {
-    //       clearAll();
-    //     }
-    //   }, 30)
-    // );
-  };
-
   const clearAll = () => {
     // console.log("clearAll");
     clearInterval(intervalId);
     setIntervalId(0);
-    // console.log('clear all');
-    // setMouseDown(false);
-    // setPlaying(false);
   };
-
 
   useEffect(() => {
     if (!ended) {
@@ -224,10 +172,6 @@ export default function IndexPage({ data }) {
 
   return (
     <main onMouseMove={onMouseMove} className={s.main}>
-      {/* {preloaded > 0 && <section className={s.preloader}>
-        Loading images: {preloaded}
-      </section> */}
-
       <Controller>
         <Scene duration="4000%">
           {(progress) => {
@@ -252,17 +196,12 @@ export default function IndexPage({ data }) {
                     playing={playing}
                     ended={ended}
                   />
-                  {/* <Sequence
-                    images={imageData}
-                    rawImages={images}
-                    rawVRImages={vr_1}
-                    progress={progress}
-                    vr_1={vr_1Data}
+                  {allImages && <CanvasSequence
                     setEnded={setEnded}
-                    setPreloaded={setPreloaded}
-                    preloaded={preloaded}
-                  /> */}
-                  <CanvasSequence setEnded={setEnded} index={index} images={allImages} style={{height: '1400px'}} />
+                    index={index}
+                    images={allImages}
+                    style={{ height: "1400px" }}
+                  />}
                 </div>
                 <Content ended={ended} setEnded={setEnded} />
               </>
@@ -270,49 +209,6 @@ export default function IndexPage({ data }) {
           }}
         </Scene>
       </Controller>
-
-      {/* <div className={cx(s.text, s.bodyText, { [s.textHidden]: !vrEnded })}>
-        <header className={s.header}>
-          <h1 className={s.h1}>FUNTIME UNICORN</h1>
-          <p className={s.authorText}>By Derrick Adams</p>
-        </header>
-        <nav className={cx(s.nav, s.bodyText)}>
-          <button className={s.bodyText}>About</button>
-          <button className={s.bodyText}>Gallery</button>
-          <button className={s.bodyText}>3D Viewer</button>
-          <button className={s.bodyText}>Share</button>
-        </nav>
-        <div className={s.textContainer}>
-          <section className={s.section}>
-            <article>
-              Derrick Adams’ new edition, brings to life not only the imagery he
-              is known for, but also the bodily experiences it is meant to
-              capture. Each sculpture in the edition is a real-life
-              manifestation of Adams’ signature iconography; a visual vocabulary
-              composed of objects, symbols, colors, and shapes, all of which are
-              recontextualized in order to depict leisure in an unprecedented
-              way while simultaneously illuminating the inherent role
-              consumerism plays in such moments of fun and relief. The edition
-              draws from Adams’ Floaters series, which includes vivid portraits
-              of Black people in various states of rest and play. Mounted atop
-              colorful unicorns or candy shaped plastic floaties popularized in
-              recent years, the figures represent an updated version of
-              contemporary American iconography. Now extended further into the
-              grasp of individuals, FUNTIME UNICORN provides a new way to
-              experience the emotions evoked by Adams’ paintings.
-            </article>
-            <article>
-              This is the gallery section
-              <div>1</div>
-              <div>2</div>
-              <div>3</div>
-              <div>4</div>
-            </article>
-            <article>This is the 3D Viewer section</article>
-            <article>This is the share section</article>
-          </section>
-        </div>
-      </div> */}
     </main>
   );
 }
@@ -338,6 +234,25 @@ export const query = graphql`
         }
       }
     }
+    vr_3: allFile(filter: { relativeDirectory: { in: "bridge" } }) {
+      edges {
+        node {
+          id
+          base
+          publicURL
+          childImageSharp {
+            gatsbyImageData(
+              quality: 90
+              formats: [AUTO, WEBP]
+              width: 1600
+              height: 900
+              blurredOptions: { width: 100, toFormat: JPG }
+              placeholder: BLURRED
+            )
+          }
+        }
+      }
+    }
     vr_2: allFile(filter: { relativeDirectory: { in: "park" } }) {
       edges {
         node {
@@ -346,10 +261,10 @@ export const query = graphql`
           publicURL
           childImageSharp {
             gatsbyImageData(
-              quality: 100
+              quality: 90
               formats: [AUTO, WEBP]
-              width: 1280
-              height: 720
+              width: 1600
+              height: 900
               blurredOptions: { width: 100, toFormat: JPG }
               placeholder: BLURRED
             )
@@ -365,10 +280,10 @@ export const query = graphql`
           publicURL
           childImageSharp {
             gatsbyImageData(
-              quality: 100
+              quality: 90
               formats: [AUTO, WEBP]
-              width: 1280
-              height: 720
+              width: 1600
+              height: 900
               blurredOptions: { width: 100, toFormat: JPG }
               placeholder: BLURRED
             )

@@ -89,30 +89,27 @@ const Title = ({
           )}
         >
           <div>
-            {sticky && (
               <h1
                 className={cx(s.h1, {
-                  [s.h1Hidden]: playing && !ended,
+                  [s.h1Hidden]: (playing && !ended) || (sticky && ended),
                 })}
               >
-                <span style={{ color: "#F395C7", letterSpacing: "-.05em" }}>F</span>
-                <span style={{ color: "#6A03A7"  }}>U</span>
-                <span style={{ color: "#016EB3", letterSpacing: "-.03em"  }}>N</span>
-                <span style={{ color: "#00B242", letterSpacing: "-.03em" }}>T</span>
-                <span style={{ color: "#FFD600" }}>I</span>
-                <span style={{ color: "#FF6B15" }}>M</span>
-                <span style={{ color: "#E13E53" }}>E</span>
+                <span className="pink" style={{ color: "#F395C7", letterSpacing: "-.055em"}}>F</span>
+                <span className="purple" style={{ color: "#6A03A7", letterSpacing: "-.1em"  }}>U</span>
+                <span className="blue" style={{ color: "#016EB3", letterSpacing: "-.05em"  }}>N</span>
+                <span className="green" style={{ color: "#00B242", letterSpacing: "-.05em" }}>T</span>
+                <span className="yellow" style={{ color: "#FFD600", letterSpacing: "-.1em" }}>I</span>
+                <span className="orange" style={{ color: "#FF6B15", letterSpacing: "-.1em" }}>M</span>
+                <span className="red" style={{ color: "#E13E53" }}>E</span>
                 <span>&nbsp;</span>
-                <span style={{ color: "#F395C7" }}>U</span>
-                <span style={{ color: "#6A03A7" }}>N</span>
-                <span style={{ color: "#016EB3" }}>I</span>
-                <span style={{ color: "#00B242" }}>C</span>
-                <span style={{ color: "#FFD600" }}>O</span>
-                <span style={{ color: "#FF6B15" }}>R</span>
-                <span style={{ color: "#E13E53" }}>N</span>
+                <span className="pink" style={{ color: "#F395C7", letterSpacing: "-.1em"}}>U</span>
+                <span className="purple" style={{ color: "#6A03A7", letterSpacing: "-.1em" }}>N</span>
+                <span className="blue" style={{ color: "#016EB3" }}>I</span>
+                <span className="green" style={{ color: "#00B242", letterSpacing: "-.0675em" }}>C</span>
+                <span className="yellow" style={{ color: "#FFD600", letterSpacing: "-.08em"  }}>O</span>
+                <span className="orange" style={{ color: "#FF6B15", letterSpacing: "-.095em" }}>R</span>
+                <span className="red" style={{ color: "#E13E53" }}>N</span>
               </h1>
-            )}
-            {sticky && (
               <p
                 className={cx(s.authorText, {
                   [s.authorTextHidden]: playing,
@@ -120,7 +117,6 @@ const Title = ({
               >
                 by Derrick Adams
               </p>
-            )}
           </div>
         </div>
       </section>

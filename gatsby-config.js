@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
-    title: `Derrick Adams`,
-    siteUrl: `https://www.yourdomain.tld`,
+    title: `Derrick Adams Editions`,
+    siteUrl: `https://derrickadamsmain.gtsb.io/`,
   },
   plugins: [
     "gatsby-plugin-styled-components",

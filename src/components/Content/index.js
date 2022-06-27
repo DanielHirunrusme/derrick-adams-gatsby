@@ -6,12 +6,12 @@ import Title from "../Title";
 import cx from "classnames";
 import { StickyContainer, Sticky } from "react-sticky";
 import Sparkles from "react-sparkle";
+import InquireForm from "../InquireForm";
 
-const Content = ({ ended, setEnded }) => {
+const Content = ({ ended, setEnded, index }) => {
   return (
     <article className={s.root}>
       <div>
-        <Title sticky={false} ended={ended} setEnded={setEnded} />
         {/* <div className={cx(t.title, t.titleContent)}>
           <StickyContainer>
             <h1 className={h1}>
@@ -45,6 +45,16 @@ const Content = ({ ended, setEnded }) => {
         </div> */}
         <div>
           <section className={s.about} id="About">
+            <Title
+              sticky={false}
+              index={index}
+              ended={ended}
+              setEnded={setEnded}
+            />
+
+            <h2>
+              <span style={{ letterSpacing: "-.04em" }}>A</span>b<span style={{ letterSpacing: "-.0875em" }}>o</span><span style={{ letterSpacing: "-.05em" }}>u</span>t
+            </h2>
             <article>
               Derrick Adams’ new edition, brings to life not only the imagery he
               is known for, but also the bodily experiences it is meant to
@@ -65,53 +75,73 @@ const Content = ({ ended, setEnded }) => {
             <table className={s.table}>
               <tbody>
                 <tr>
-                  <td>Edition</td>
-                  <td>200</td>
-                </tr>
-                <tr>
-                  <td>Year</td>
-                  <td>2022</td>
-                </tr>
-                <tr>
-                  <td>Dimensions</td>
-                  <td>55 × 62 × 21 in</td>
-                </tr>
-                <tr>
-                  <td>Weight</td>
-                  <td>348 lbs</td>
-                </tr>
-                <tr>
-                  <td>Includes</td>
-                  <td>Mounting and assembly hardware</td>
-                </tr>
-                <tr>
-                  <td>Materials</td>
                   <td>
-                    Cast aluminum, steel, aluminum alloy, alloy steel coil,
-                    stainless steel, and hand painted enamel
+                    <p>Edition</p>
+                  </td>
+                  <td>
+                    <p>200</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <p>Year</p>
+                  </td>
+                  <td>
+                    <p>2022</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <p>Dimensions</p>
+                  </td>
+                  <td>
+                    <p>55 × 62 × 21 in</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <p>Weight</p>
+                  </td>
+                  <td>
+                    <p>348 lbs</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <p>Includes</p>
+                  </td>
+                  <td>
+                    <p>Mounting and assembly hardware</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <p>Materials</p>
+                  </td>
+                  <td>
+                    <p>
+                      Cast aluminum, steel, aluminum alloy, alloy steel coil,
+                      stainless steel, and hand painted enamel
+                    </p>
                   </td>
                 </tr>
               </tbody>
             </table>
             <article className={s.gallery} id="Gallery">
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
+              <h2>Gallery</h2>
+              <div className={s.galleryGrid}>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
             </article>
             <article className={s.purchase} id="Purchase">
-              <div style={{ position: "relative" }}>
-                <a href="">Purchase</a>
-                <Sparkles
-                  color={"#F2F1EF"}
-                  flicker={false}
-                  fadeOutSpeed={60}
-                  count={8}
-                  minSize={4}
-                  maxSize={8}
-                />
-              </div>
-              <p className="small">Inquire above for more purchase information.</p>
+              <h2>Purchase</h2>
+              <InquireForm />
+              
               {/* <ul>
                 <li>
                   <a

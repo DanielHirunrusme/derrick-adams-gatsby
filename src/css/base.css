@@ -3,80 +3,88 @@
 @import url("https://use.typekit.net/jvj7tpb.css");
 
 @font-face {
-    font-family: 'Alte Haas Grotesk';
-    src: url('/AlteHaasGrotesk.woff2') format('woff2'),
-        url('/AlteHaasGrotesk.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
+  font-family: "Alte Haas Grotesk";
+  src: url("/AlteHaasGrotesk.woff2") format("woff2"),
+    url("/AlteHaasGrotesk.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'Alte Haas Grotesk';
-    src: url('/AlteHaasGrotesk_Bold.woff2') format('woff2'),
-        url('/AlteHaasGrotesk_Bold.woff') format('woff');
-    font-weight: bold;
-    font-style: normal;
-    font-display: swap;
+  font-family: "Alte Haas Grotesk";
+  src: url("/AlteHaasGrotesk_Bold.woff2") format("woff2"),
+    url("/AlteHaasGrotesk_Bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
 }
-
-
 
 body {
-    margin: 0;
-    overflow-x: hidden;
-    padding: 0;
-    font-size: 20px;
-    /* letter-spacing: -0.02em; */
-    letter-spacing: -.01em;
-    /* font-family: "sofia-pro-soft"; */
-    /* font-weight: 700; */
-    font-family: 'Alte Haas Grotesk';
-    font-weight: bold;
+  margin: 0;
+  overflow-x: hidden;
+  padding: 0;
+  font-size: 20px;
+  /* letter-spacing: -0.02em; */
+  letter-spacing: -0.02em;
+  /* font-family: "sofia-pro-soft"; */
+  /* font-weight: 700; */
+  font-family: "Alte Haas Grotesk";
+  font-weight: bold;
 }
- 
+
+input::placeholder, textarea::placeholder, button, textarea {
+  font-family: "Alte Haas Grotesk";
+  font-weight: bold !important;
+
+}
+
 .small {
-    font-size: 14px;
+  font-size: 14px;
+  line-height: 1.2;
 }
 
 body::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
-
-
 .CircularProgressbar-trail {
-    stroke: #694d00 !important;
-    transition: all .2s;
+  stroke: #694d00 !important;
+  transition: all 0.2s;
 }
 
 .CircularProgressbar .CircularProgressbar-path {
-    min-height: 100%;
-    /* stroke: url(#gradientStroke) !important; */
-    stroke: #C09725 !important;
-    /* animation: a 2s linear infinite !important; */
+  min-height: 100%;
+  /* stroke: url(#gradientStroke) !important; */
+  stroke: #c09725 !important;
+  /* animation: a 2s linear infinite !important; */
+}
+
+button {
+  cursor: pointer;
+  letter-spacing: -0.02em;
 }
 
 @keyframes a {
-    0% {
-        stroke: #EAA3F8 !important;
-    }
+  0% {
+    stroke: #eaa3f8 !important;
+  }
 
-    20% {
-        stroke: #CD1318 !important;
-    }
+  20% {
+    stroke: #cd1318 !important;
+  }
 
-    40% {
-        stroke: #20A12E !important;
-    }
+  40% {
+    stroke: #20a12e !important;
+  }
 
-    60% {
-        stroke: #1536AB !important;
-    }
+  60% {
+    stroke: #1536ab !important;
+  }
 
-    80% {
-        stroke: #8B12DE !important;
-    }
+  80% {
+    stroke: #8b12de !important;
+  }
 }
 
 body,
@@ -87,49 +95,402 @@ h3,
 h4,
 h5,
 nav,
-a {
-    background: none;
-    border: none;
-    font-size: 20px;
-    letter-spacing: -.01em;
-    /* letter-spacing: -0.02em; */
-    text-decoration: none;
+a,
+input,
+textarea {
+  background: none;
+  border: none;
+  font-size: 20px;
+  letter-spacing: -0.02em;
+  /* letter-spacing: -0.02em; */
+  text-decoration: none;
 }
 
-
 @media screen and (min-width: 768px) {
-    body,
-    button,
-    p,
-    h2,
-    h3,
-    h4,
-    h5,
-    nav,
-    a {
-        font-size: 2.1vw;
-        line-height: 1.275;
-        letter-spacing: -.025em;
-        /* letter-spacing: -0.02em; */
-    }
+  body,
+  button,
+  p,
+  h2,
+  h3,
+  h4,
+  h5,
+  nav,
+  a,
+  input,
+  textarea {
+    font-size: 2.1vw;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    font-weight:bold;
+    /* letter-spacing: -0.02em; */
+  }
 }
 
 button {
-    display: inline;
+  display: inline;
 }
 
 nav,
 nav * {
-    color: white;
-    /* font-family: '', sans-serif; */
+  color: white;
 }
 
 ul {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 ul li {
-    margin-bottom: 1em;
-    list-style: none;
+  margin-bottom: 1em;
+  list-style: none;
+}
+
+h2 {
+  margin: 0;
+  font-size: 10.875vw;
+  letter-spacing: -0.07em;
+  text-align: center;
+  margin-bottom: .5em;
+}
+
+@media screen and (min-width: 768px) {
+  h2 {
+    margin-bottom: 0.125em;
+  }
+}
+
+@keyframes pink {
+  /* 1 */
+  0% {
+    color: #f395c7;
+  }
+  13.99% {
+    color: #f395c7;
+  }
+  /* 2 */
+  14% {
+    color: #6a03a7;
+  }
+  27.99% {
+    color: #6a03a7;
+  }
+  /* 3 */
+  28% {
+    color: #016eb3;
+  }
+  41.99% {
+    color: #016eb3;
+  }
+  /* 4 */
+  42% {
+    color: #00b242;
+  }
+  55.99% {
+    color: #00b242;
+  }
+  /* 5 */
+  56% {
+    color: #ffd600;
+  }
+  69.99% {
+    color: #ffd600;
+  }
+  /* 6 */
+  70% {
+    color: #ff6b15;
+  }
+  83.99% {
+    color: #ff6b15;
+  }
+  /* 7 */
+  84% {
+    color: #e13e53;
+  }
+  99.99% {
+    color: #e13e53;
+  }
+  /* 8 */
+  100% {
+    color: #f395c7;
+  }
+}
+
+@keyframes purple {
+  /* 1 */
+  0%,
+  13.99% {
+    color: #6a03a7; /* purple */
+  }
+  /* 2 */
+  14%,
+  27.99% {
+    color: #016eb3; /* blue */
+  }
+  /* 3 */
+  28%,
+  41.99% {
+    color: #00b242; /* green */
+  }
+  /* 4 */
+  42%,
+  55.99% {
+    color: #ffd600; /* yellow */
+  }
+  /* 5 */
+  56%,
+  69.99% {
+    color: #ff6b15; /* orange */
+  }
+  /* 6 */
+  70%,
+  83.99% {
+    color: #e13e53; /* red */
+  }
+  /* 7 */
+  84%,
+  99.99% {
+    color: #f395c7; /* pink */
+  }
+  /* 8 */
+  100% {
+    color: #6a03a7; /* purple */
+  }
+}
+
+@keyframes blue {
+  /* 1 */
+  0%,
+  13.99% {
+    color: #016eb3; /* blue */
+  }
+  /* 2 */
+  14%,
+  27.99% {
+    color: #00b242; /* green */
+  }
+  /* 3 */
+  28%,
+  41.99% {
+    color: #ffd600; /* yellow */
+  }
+  /* 4 */
+  42%,
+  55.99% {
+    color: #ff6b15; /* orange */
+  }
+  /* 5 */
+  56%,
+  69.99% {
+    color: #e13e53; /* red */
+  }
+  /* 6 */
+  70%,
+  83.99% {
+    color: #f395c7; /* pink */
+  }
+  /* 7 */
+  84%,
+  99.99% {
+    color: #6a03a7; /* purple */
+  }
+  /* 8 */
+  100% {
+    color: #016eb3; /* blue */
+  }
+}
+
+@keyframes green {
+  /* 1 */
+  0%,
+  13.99% {
+    color: #00b242; /* green */
+  }
+  /* 2 */
+  14%,
+  27.99% {
+    color: #ffd600; /* yellow */
+  }
+  /* 3 */
+  28%,
+  41.99% {
+    color: #ff6b15; /* orange */
+  }
+  /* 4 */
+  42%,
+  55.99% {
+    color: #e13e53; /* red */
+  }
+  /* 5 */
+  56%,
+  69.99% {
+    color: #f395c7; /* pink */
+  }
+  /* 6 */
+  70%,
+  83.99% {
+    color: #6a03a7; /* purple */
+  }
+  /* 7 */
+  84%,
+  99.99% {
+    color: #016eb3; /* blue */
+  }
+  /* 8 */
+  100% {
+    color: #00b242; /* green */
+  }
+}
+
+@keyframes yellow {
+  /* 1 */
+  0%,
+  13.99% {
+    color: #ffd600; /* yellow */
+  }
+  /* 2 */
+  14%,
+  27.99% {
+    color: #ff6b15; /* orange */
+  }
+  /* 3 */
+  28%,
+  41.99% {
+    color: #e13e53; /* red */
+  }
+  /* 4 */
+  42%,
+  55.99% {
+    color: #f395c7; /* pink */
+  }
+  /* 5 */
+  56%,
+  69.99% {
+    color: #6a03a7; /* purple */
+  }
+  /* 6 */
+  70%,
+  83.99% {
+    color: #016eb3; /* blue */
+  }
+  /* 7 */
+  84%,
+  99.99% {
+    color: #00b242; /* green */
+  }
+  /* 8 */
+  100% {
+    color: #ffd600; /* yellow */
+  }
+}
+
+@keyframes orange {
+  /* 1 */
+  0%,
+  13.99% {
+    color: #ff6b15; /* orange */
+  }
+  /* 2 */
+  14%,
+  27.99% {
+    color: #e13e53; /* red */
+  }
+  /* 3 */
+  28%,
+  41.99% {
+    color: #f395c7; /* pink */
+  }
+  /* 4 */
+  42%,
+  55.99% {
+    color: #6a03a7; /* purple */
+  }
+  /* 5 */
+  56%,
+  69.99% {
+    color: #016eb3; /* blue */
+  }
+  /* 6 */
+  70%,
+  83.99% {
+    color: #00b242; /* green */
+  }
+  /* 7 */
+  84%,
+  99.99% {
+    color: #ffd600; /* yellow */
+  }
+  /* 8 */
+  100% {
+    color: #ff6b15; /* orange */
+  }
+}
+
+@keyframes red {
+  /* 1 */
+  0%,
+  13.99% {
+    color: #e13e53; /* red */
+  }
+  /* 2 */
+  14%,
+  27.99% {
+    color: #f395c7; /* pink */
+  }
+  /* 3 */
+  28%,
+  41.99% {
+    color: #6a03a7; /* purple */
+  }
+  /* 4 */
+  42%,
+  55.99% {
+    color: #016eb3; /* blue */
+  }
+  /* 5 */
+  56%,
+  69.99% {
+    color: #00b242; /* green */
+  }
+  /* 6 */
+  70%,
+  83.99% {
+    color: #ffd600; /* yellow */
+  }
+  /* 7 */
+  84%,
+  99.99% {
+    color: #ff6b15; /* orange */
+  }
+  /* 8 */
+  100% {
+    color: #e13e53; /* red */
+  }
+}
+
+.yellow {
+  animation: yellow .75s linear forwards infinite;
+}
+
+.orange {
+  animation: orange .75s linear forwards infinite;
+}
+
+.red {
+  animation: red .75s linear forwards infinite;
+}
+
+.green {
+  animation: green .75s linear forwards infinite;
+}
+
+.blue {
+  animation: blue .75s linear forwards infinite;
+}
+
+.pink {
+  animation: pink .75s linear forwards infinite;
+}
+
+.purple {
+  animation: purple .75s linear forwards infinite;
 }

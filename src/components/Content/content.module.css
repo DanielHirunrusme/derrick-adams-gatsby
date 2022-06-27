@@ -1,5 +1,5 @@
 .root {
-    /* margin-top: 100vh; */
+    margin-top: 100vh;
     padding: 0 30px;
     margin-bottom: 60px;
     position: relative;
@@ -22,7 +22,7 @@
 
 .nav:after {
     content: '';
-    height: 3px;
+    height: .15em;
     width: 100%;
     background:black;
     border-radius: 8px;
@@ -39,63 +39,68 @@
     padding-top: 4em;
 }
 
-.table {
-    border-collapse: collapse;
-    margin: 2em 0 0 0;
-    border-radius: 6px;
-    display: block;
-    border: 3px solid black;
-}
-
-.table td {
-    padding: .25em;
-    padding-bottom: .75em;
-    position: relative;
-    vertical-align: top;
-}
-
 .purchase a {
     padding: 1em;
     background: #C09725;
     display: block;
     color: black;
-    border-radius: 4px;
+    border-radius: .15em;
     text-align: center;
 }
 
 
+.root table {
+    /* overflow: hidden; */
+}
 
-.table tr:not(:last-of-type) td:after {
+.root table {
+    border-collapse: collapse;
+    border-radius: .15em;
+    display: block;
+    border: .15em solid black;
+}
+
+.root article + table {
+    margin: 2em 0 0 0;
+
+}
+
+.root table td {
+    padding: .5em;
+    padding-bottom: 1em;
+    position: relative;
+    vertical-align: top;
+}
+
+.root table tr:not(:last-of-type) td:after {
     content: '';
     width: calc(100% + 1px);
-    height: 3px;
+    height: .15em;
     background-color: black;
     left:-1px;
     position: absolute;
     pointer-events: none;
     bottom: 0;
-    /* border-radius: 4px; */
 }
 
-.table td:not(:last-of-type) {
-    border-right: 3px solid black;
+.root table td:not(:last-of-type) {
+    border-right: .15em solid black;
     padding-right: 1em;
 }
 
-.gallery::-webkit-scrollbar {
-    display: none;
-  }
-
-.gallery div {
-    /* flex: 0 0 50vw; */
+.galleryGrid div {
     width: 100%;
     height: 50vh;
     background: gray;
-    border-radius: 6px;
+    border-radius: .15em;
 }
 
-.gallery div:not(:last-child) {
+.galleryGrid div:not(:last-child) {
     margin-bottom: 30px;
+}
+
+.root table td p {
+    margin: 0;
 }
 
 @media screen and (min-width: 768px) {
@@ -111,23 +116,16 @@
         margin-bottom: 0px;
     }
 
-    .gallery {
+    .galleryGrid {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 60px;
+        gap: 1em;
+        margin-top: .75em;
         /* overflow-x: scroll; */
         /* margin: 0 -60px; */
     }
 
-    .gallery div:first-child {
-        /* margin-left: 60px; */
-    }
-    
-    .gallery div:last-child {
-        /* margin-right: 60px; */
-    }
-
-    .gallery div {
+    .galleryGrid div {
         /* flex: 0 0 33.33vw; */
         /* width: 33.33vw; */
         height: 40vw;
@@ -139,7 +137,9 @@
         padding: 0 60px;
     }
 
-    .table {
+    .root p + table {
         margin: 1.5em 0 0;
     }
+
+
 }
