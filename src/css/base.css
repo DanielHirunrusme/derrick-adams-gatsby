@@ -36,12 +36,16 @@ body {
 input::placeholder, textarea::placeholder, button, textarea {
   font-family: "Alte Haas Grotesk";
   font-weight: bold !important;
+}
 
+input:hover::placeholder, textarea:hover::placeholder {
+  color: black;
 }
 
 .small {
   font-size: 14px;
   line-height: 1.2;
+  display: block;
 }
 
 body::-webkit-scrollbar {
@@ -49,14 +53,14 @@ body::-webkit-scrollbar {
 }
 
 .CircularProgressbar-trail {
-  stroke: #694d00 !important;
-  transition: all 0.2s;
+  stroke: #c09725 !important;
+  transition: all 0s;
 }
 
 .CircularProgressbar .CircularProgressbar-path {
   min-height: 100%;
   /* stroke: url(#gradientStroke) !important; */
-  stroke: #c09725 !important;
+  stroke: #ffd600 !important;
   /* animation: a 2s linear infinite !important; */
 }
 

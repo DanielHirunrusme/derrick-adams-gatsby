@@ -11,14 +11,6 @@
     /* font-family: 'Karl', sans-serif; */
 }
 
-.root .text {
-    /* border-bottom: .12em solid transparent; */
-    /* margin-bottom: -.12em; */
-}
-
-.root:hover .text {
-    /* border-bottom: .12em solid; */
-}
 
 .text {
     padding-top: .75em;
@@ -37,7 +29,27 @@
 
 }
 
+@keyframes pulse {
+    0%,
+    100% {
+        background: #C09725;
+    }
+
+    49.999% {
+        background: #C09725;
+    }
+
+    50% {
+        background: #ffd600;
+    }
+
+    99.999% {
+        background: #ffd600;
+    }
+  }
+
 .button {
+    animation: pulse .75s linear forwards infinite;
     width: 72px;
     height: 72px;
     background: #C09725;
@@ -47,6 +59,7 @@
     user-select: none;
     outline: none;
     transition: all .2s;
+    transition-property: background-color, border-radius, width, height;
     text-transform: uppercase;
     /* font-weight: bold; */
     font-size: 12px;
@@ -56,9 +69,15 @@
     transform: translate(-50%, -50%);
 }
 
+.button:hover {
+    background: #ffd600;
+    animation: none;
+}
+
 
 
 .buttonPlaying {
+    animation: none;
     cursor: none;
     width: 52px !important;
     height: 52px !important;

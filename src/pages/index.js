@@ -72,16 +72,51 @@ export default function IndexPage({ data }) {
   };
 
   useEffect(() => {
-    const images = sortStringInts(data?.core?.edges);
-    const vr = getRandVR();
-  
-    images.map((img) => {
-      setAllImages(allImages.push(img.node.publicURL));
-    });
-    vr.map((img) => {
-      setAllImages(allImages.push(img.node.publicURL));
-    });
-  }, [])
+    if (typeof window) {
+      const images = sortStringInts(data?.core?.edges);
+      const vr = getRandVR();
+console.log(images)
+      if (window.innerWidth <= 768) {
+        // mobile images
+        images.map((img) => {
+          let mImg =
+            img.node.childImageSharp.gatsbyImageData.images.sources[0].srcSet.split(
+              ","
+            )[0];
+          mImg = mImg.split(" 750w").join("");
+          setAllImages(allImages.push(mImg));
+        });
+        vr.map((img) => {
+          let mImg =
+            img.node.childImageSharp.gatsbyImageData.images.sources[0].srcSet.split(
+              ","
+            )[0];
+          mImg = mImg.split(" 750w").join("");
+          setAllImages(allImages.push(mImg));
+        });
+      } else {
+        // desktop images
+        images.map((img) => {
+          let mImg =
+            img.node.childImageSharp.gatsbyImageData.images.sources[0].srcSet.split(
+              ","
+            )[3];
+          mImg = mImg.split(" 1600w").join("");
+          setAllImages(allImages.push(mImg));
+          // setAllImages(allImages.push(img.node.publicURL));
+        });
+        vr.map((img) => {
+          let mImg =
+            img.node.childImageSharp.gatsbyImageData.images.sources[0].srcSet.split(
+              ","
+            )[3];
+          mImg = mImg.split(" 1600w").join("");
+          setAllImages(allImages.push(mImg));
+          // setAllImages(allImages.push(img.node.publicURL));
+        });
+      }
+    }
+  }, []);
 
   useInterval(
     () => {
@@ -196,12 +231,14 @@ export default function IndexPage({ data }) {
                     playing={playing}
                     ended={ended}
                   />
-                  {allImages && <CanvasSequence
-                    setEnded={setEnded}
-                    index={index}
-                    images={allImages}
-                    style={{ height: "1400px" }}
-                  />}
+                  {allImages && (
+                    <CanvasSequence
+                      setEnded={setEnded}
+                      index={index}
+                      images={allImages}
+                      style={{ height: "100vh" }}
+                    />
+                  )}
                 </div>
                 <Content ended={ended} setEnded={setEnded} />
               </>
@@ -223,12 +260,10 @@ export const query = graphql`
           publicURL
           childImageSharp {
             gatsbyImageData(
-              width: 1280
-              height: 720
-              quality: 100
+              width: 1600
+              height: 900
+              quality: 90
               formats: [AUTO, WEBP]
-              blurredOptions: { width: 100, toFormat: JPG }
-              placeholder: BLURRED
             )
           }
         }
@@ -246,8 +281,6 @@ export const query = graphql`
               formats: [AUTO, WEBP]
               width: 1600
               height: 900
-              blurredOptions: { width: 100, toFormat: JPG }
-              placeholder: BLURRED
             )
           }
         }
@@ -265,8 +298,6 @@ export const query = graphql`
               formats: [AUTO, WEBP]
               width: 1600
               height: 900
-              blurredOptions: { width: 100, toFormat: JPG }
-              placeholder: BLURRED
             )
           }
         }
@@ -284,8 +315,6 @@ export const query = graphql`
               formats: [AUTO, WEBP]
               width: 1600
               height: 900
-              blurredOptions: { width: 100, toFormat: JPG }
-              placeholder: BLURRED
             )
           }
         }

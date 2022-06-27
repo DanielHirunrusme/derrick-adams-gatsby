@@ -61,7 +61,7 @@
   transition: 0.5s opacity;
   transition-delay: 2s;
   text-align: center;
-  pointer-events: none;
+  /* pointer-events: none; */
 }
 
 .titleContent {
@@ -82,11 +82,7 @@
   opacity: 1;
   transition: 0s opacity;
   display: inline-block;
-  font-weight: 700;
-}
-
-.h1 span:hover {
-  transform: translateY(-5px);
+  font-weight: bold;
 }
 
 .h1Hidden span {
@@ -186,6 +182,18 @@
   /* font-size: 20px; */
 }
 
+.header::before {
+  content: "";
+  position: absolute;
+  left: 30px;
+  bottom: 0;
+  height: .15em;
+  background: white;
+  border-radius: 6px;
+  width: 0;
+  transition: width 1s;
+}
+
 .headerInner {
   padding: 25px 0;
 }
@@ -256,6 +264,10 @@
   font-size: 20px;
   /* margin-right: 50px; */
   /* font-size: 14px; */
+}
+
+.external a:hover {
+  border: none;
 }
 
 .bodyTextUppercase {
@@ -365,6 +377,9 @@
 @media screen and (min-width: 768px) {
   .title {
     margin-left: -0.25em;
+  }
+  .header::before {
+    background: transparent;
   }
   .headerSticky::before {
     bottom: "auto";

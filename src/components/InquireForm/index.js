@@ -182,6 +182,7 @@ const InquireForm = () => {
               maxSize={8}
             />
           </div>
+          <br />
           <span className="small">
             By submitting the form you agree to be contacted.
           </span>

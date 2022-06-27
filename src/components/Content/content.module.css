@@ -4,11 +4,12 @@
     margin-bottom: 60px;
     position: relative;
     z-index: 99;
+    background: linear-gradient(0deg, rgba(255,255,255,1) 67%, rgba(255,255,255,0) 100%);
     /* background: white; */
 }
 
 .nav {
-    background: white;
+    background: #f2f2f2;
     position: relative;
     z-index: 10;
     color: black;
@@ -36,7 +37,7 @@
 }
 
 .about, .purchase, .gallery {
-    padding-top: 4em;
+    padding-top: 6em;
 }
 
 .purchase a {

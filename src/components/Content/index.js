@@ -4,7 +4,6 @@ import * as s from "./content.module.css";
 import { h1 } from "../../css/typography.module.css";
 import Title from "../Title";
 import cx from "classnames";
-import { StickyContainer, Sticky } from "react-sticky";
 import Sparkles from "react-sparkle";
 import InquireForm from "../InquireForm";
 
@@ -12,65 +11,32 @@ const Content = ({ ended, setEnded, index }) => {
   return (
     <article className={s.root}>
       <div>
-        {/* <div className={cx(t.title, t.titleContent)}>
-          <StickyContainer>
-            <h1 className={h1}>
-              <span style={{ color: "#F395C7" }}>F</span>
-              <span style={{ color: "#6A03A7" }}>U</span>
-              <span style={{ color: "#016EB3" }}>N</span>
-              <span style={{ color: "#00B242" }}>T</span>
-              <span style={{ color: "#FFD600" }}>I</span>
-              <span style={{ color: "#FF6B15" }}>M</span>
-              <span style={{ color: "#E13E53" }}>E</span>
-              <span>&nbsp;</span>
-              <span style={{ color: "#F395C7" }}>U</span>
-              <span style={{ color: "#6A03A7" }}>N</span>
-              <span style={{ color: "#016EB3" }}>I</span>
-              <span style={{ color: "#00B242" }}>C</span>
-              <span style={{ color: "#FFD600" }}>O</span>
-              <span style={{ color: "#FF6B15" }}>R</span>
-              <span style={{ color: "#E13E53" }}>N</span>
-            </h1>
-            <p>by Derrick Adams</p>
-            <Sticky topOffset={0}>
-              {({ style }) => (
-                <nav style={style} className={s.nav}>
-                  <a href="#about">About</a>,&nbsp;
-                  <a href="#gallery">Gallery</a>,&nbsp;
-                  <a href="#purchase">Purchase</a>
-                </nav>
-              )}
-            </Sticky>
-          </StickyContainer>
-        </div> */}
         <div>
+          <Title
+            sticky={false}
+            index={index}
+            ended={ended}
+            setEnded={setEnded}
+          />
           <section className={s.about} id="About">
-            <Title
-              sticky={false}
-              index={index}
-              ended={ended}
-              setEnded={setEnded}
-            />
-
             <h2>
-              <span style={{ letterSpacing: "-.04em" }}>A</span>b<span style={{ letterSpacing: "-.0875em" }}>o</span><span style={{ letterSpacing: "-.05em" }}>u</span>t
+              <span style={{ letterSpacing: "-.04em" }}>A</span>b
+              <span style={{ letterSpacing: "-.0875em" }}>o</span>
+              <span style={{ letterSpacing: "-.05em" }}>u</span>t
             </h2>
             <article>
-              Derrick Adams’ new edition, brings to life not only the imagery he
-              is known for, but also the bodily experiences it is meant to
-              capture. Each sculpture in the edition is a real-life
-              manifestation of Adams’ signature iconography; a visual vocabulary
-              composed of objects, symbols, colors, and shapes, all of which are
-              recontextualized in order to depict leisure in an unprecedented
-              way while simultaneously illuminating the inherent role
-              consumerism plays in such moments of fun and relief. The edition
-              draws from Adams’ Floaters series, which includes vivid portraits
-              of Black people in various states of rest and play. Mounted atop
-              colorful unicorns or candy shaped plastic floaties popularized in
-              recent years, the figures represent an updated version of
-              contemporary American iconography. Now extended further into the
-              grasp of individuals, FUNTIME UNICORN provides a new way to
-              experience the emotions evoked by Adams’ paintings.
+              <p>
+                FUNTIME UNICORN builds off Derrick Adams’ signature iconography
+                and imagery via a continuation of the artist's acclaimed Floater
+                paintings -- a collection of vivid portraits that show Black
+                people in various states of rest and play atop the popularized
+                plastic pool float. An ode to the Black Unicorn figure first
+                appearing in the Floater paintings, then realized as life-size
+                inflatable pool floats, Funtime Unicorn in this latest iteration
+                is a manifestation of Adams' conviction. The idea that Black
+                joy, love, and play should be normalized and celebrated in
+                popular visual culture.
+              </p>
             </article>
             <table className={s.table}>
               <tbody>
@@ -79,7 +45,7 @@ const Content = ({ ended, setEnded, index }) => {
                     <p>Edition</p>
                   </td>
                   <td>
-                    <p>200</p>
+                    <p>30 + 10 APs</p>
                   </td>
                 </tr>
                 <tr>
@@ -95,7 +61,9 @@ const Content = ({ ended, setEnded, index }) => {
                     <p>Dimensions</p>
                   </td>
                   <td>
-                    <p>55 × 62 × 21 in</p>
+                    <p>
+                      37 9/16” tall (seat is 21 1/8”), 43 7/16” long, 8” wide
+                    </p>
                   </td>
                 </tr>
                 <tr>
@@ -103,7 +71,7 @@ const Content = ({ ended, setEnded, index }) => {
                     <p>Weight</p>
                   </td>
                   <td>
-                    <p>348 lbs</p>
+                    <p>94 lbs (without spring)</p>
                   </td>
                 </tr>
                 <tr>
@@ -141,29 +109,6 @@ const Content = ({ ended, setEnded, index }) => {
             <article className={s.purchase} id="Purchase">
               <h2>Purchase</h2>
               <InquireForm />
-              
-              {/* <ul>
-                <li>
-                  <a
-                    href="mailto:sales@derrickadamseditions.com"
-                    title="Purchase"
-                  >
-                    Purchase
-                  </a>
-                </li>
-                <li>
-                  <a href="mailto:sales@derrickadamseditions.com" title="Press">
-                    Press
-                  </a>
-                </li>
-                <li>
-                  <a href="mailto:sales@derrickadamseditions.com" title="Press">
-                    Contact
-                  </a>
-                </li>
-              </ul> */}
-
-              {/* <p>Inquire to purchase<br /> <a href="mailto:sales@derrickadamseditions.com" title="Inquire">sales@derrickadamseditions.com</a></p> */}
             </article>
           </section>
         </div>

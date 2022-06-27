@@ -2,6 +2,7 @@ import React from "react";
 import cx from "classnames";
 import * as s from "../../css/index.module.css";
 import { AnchorLink } from "gatsby-plugin-anchor-links";
+import { TOTAL_COUNT } from "../../utils/settings";
 
 const Title = ({
   playing,
@@ -16,12 +17,11 @@ const Title = ({
   };
   return (
     <>
-      {sticky && !playing && (
+      {sticky && (
         <header
           className={cx(
             s.header,
-            { [s.headerSticky]: ended }
-            // { [s.headerHidden]: ended && sticky }
+            { [s.headerSticky]: index >= TOTAL_COUNT }
           )}
         >
           <nav className={s.headerInner}>
@@ -49,7 +49,7 @@ const Title = ({
               onAnchorLinkClick={anchorLinkClicked}
             />
             <div className={s.external}>
-              {/* <a href="http://www.derrickadams.com/" target="blank">
+              <a href="http://www.derrickadams.com/" target="blank">
                 <svg
                   width="1em"
                   viewBox="0 0 467 474"
@@ -61,7 +61,7 @@ const Title = ({
                     d="M459.83 237.8L250.48 6.66014C246.769 2.66794 241.574 0.402344 236.128 0.402344C230.687 0.402344 225.483 2.66405 221.776 6.65625L5.66629 239.056C0.357688 244.767 -1.06422 253.079 2.04909 260.236C5.16628 267.381 12.2211 272.006 20.0181 272.006H75.6041V440.006C75.6041 458.561 90.1201 473.608 108.678 473.608H148.401C160.772 473.608 170.799 463.577 170.799 451.21L170.803 367.206C170.803 354.835 180.834 344.808 193.201 344.808H271.599C283.97 344.808 293.997 354.839 293.997 367.206V451.206C293.997 463.577 304.028 473.604 316.395 473.604H355.063C373.625 473.608 389.2 458.561 389.2 440.006V272.006H446.649C446.692 272.01 446.735 272.006 446.762 272.006C457.594 272.006 466.364 263.237 466.364 252.404C466.356 246.603 463.837 241.392 459.833 237.802L459.83 237.8Z"
                   />
                 </svg>
-              </a> */}
+              </a>
 
               <a href="https://www.instagram.com/derrickadamsny" target="blank">
                 <svg
@@ -89,34 +89,103 @@ const Title = ({
           )}
         >
           <div>
+            <AnchorLink
+              to="/#About"
+              title="About"
+              className="stripped"
+              stripHash
+              onAnchorLinkClick={anchorLinkClicked}
+            >
               <h1
                 className={cx(s.h1, {
                   [s.h1Hidden]: (playing && !ended) || (sticky && ended),
                 })}
               >
-                <span className="pink" style={{ color: "#F395C7", letterSpacing: "-.055em"}}>F</span>
-                <span className="purple" style={{ color: "#6A03A7", letterSpacing: "-.1em"  }}>U</span>
-                <span className="blue" style={{ color: "#016EB3", letterSpacing: "-.05em"  }}>N</span>
-                <span className="green" style={{ color: "#00B242", letterSpacing: "-.05em" }}>T</span>
-                <span className="yellow" style={{ color: "#FFD600", letterSpacing: "-.1em" }}>I</span>
-                <span className="orange" style={{ color: "#FF6B15", letterSpacing: "-.1em" }}>M</span>
-                <span className="red" style={{ color: "#E13E53" }}>E</span>
+                <span
+                  className="pink"
+                  style={{ color: "#F395C7", letterSpacing: "-.055em" }}
+                >
+                  F
+                </span>
+                <span
+                  className="purple"
+                  style={{ color: "#6A03A7", letterSpacing: "-.1em" }}
+                >
+                  U
+                </span>
+                <span
+                  className="blue"
+                  style={{ color: "#016EB3", letterSpacing: "-.05em" }}
+                >
+                  N
+                </span>
+                <span
+                  className="green"
+                  style={{ color: "#00B242", letterSpacing: "-.05em" }}
+                >
+                  T
+                </span>
+                <span
+                  className="yellow"
+                  style={{ color: "#FFD600", letterSpacing: "-.1em" }}
+                >
+                  I
+                </span>
+                <span
+                  className="orange"
+                  style={{ color: "#FF6B15", letterSpacing: "-.1em" }}
+                >
+                  M
+                </span>
+                <span className="red" style={{ color: "#E13E53" }}>
+                  E
+                </span>
                 <span>&nbsp;</span>
-                <span className="pink" style={{ color: "#F395C7", letterSpacing: "-.1em"}}>U</span>
-                <span className="purple" style={{ color: "#6A03A7", letterSpacing: "-.1em" }}>N</span>
-                <span className="blue" style={{ color: "#016EB3" }}>I</span>
-                <span className="green" style={{ color: "#00B242", letterSpacing: "-.0675em" }}>C</span>
-                <span className="yellow" style={{ color: "#FFD600", letterSpacing: "-.08em"  }}>O</span>
-                <span className="orange" style={{ color: "#FF6B15", letterSpacing: "-.095em" }}>R</span>
-                <span className="red" style={{ color: "#E13E53" }}>N</span>
+                <span
+                  className="pink"
+                  style={{ color: "#F395C7", letterSpacing: "-.1em" }}
+                >
+                  U
+                </span>
+                <span
+                  className="purple"
+                  style={{ color: "#6A03A7", letterSpacing: "-.1em" }}
+                >
+                  N
+                </span>
+                <span className="blue" style={{ color: "#016EB3" }}>
+                  I
+                </span>
+                <span
+                  className="green"
+                  style={{ color: "#00B242", letterSpacing: "-.0675em" }}
+                >
+                  C
+                </span>
+                <span
+                  className="yellow"
+                  style={{ color: "#FFD600", letterSpacing: "-.08em" }}
+                >
+                  O
+                </span>
+                <span
+                  className="orange"
+                  style={{ color: "#FF6B15", letterSpacing: "-.095em" }}
+                >
+                  R
+                </span>
+                <span className="red" style={{ color: "#E13E53" }}>
+                  N
+                </span>
               </h1>
-              <p
-                className={cx(s.authorText, {
-                  [s.authorTextHidden]: playing,
-                })}
-              >
-                by Derrick Adams
-              </p>
+            </AnchorLink>
+            <p
+              className={cx(s.authorText, {
+                [s.authorTextHidden]: (sticky && playing) || (ended && sticky),
+              })}
+            >
+              by Derrick Adams
+            </p>
           </div>
         </div>
       </section>
