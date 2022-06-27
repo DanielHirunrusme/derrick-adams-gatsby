@@ -32,14 +32,14 @@ const Title = ({
               stripHash
               onAnchorLinkClick={anchorLinkClicked}
             />
-            ,&nbsp;
+            {/* ,&nbsp;
             <AnchorLink
               to="/#Gallery"
               title="Gallery"
               className="stripped"
               stripHash
               onAnchorLinkClick={anchorLinkClicked}
-            />
+            /> */}
             ,&nbsp;
             <AnchorLink
               to="/#Purchase"

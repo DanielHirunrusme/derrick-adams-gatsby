@@ -8,6 +8,7 @@
     color: white;
     text-align: center;
     cursor: pointer;
+    user-select: none;
     /* font-family: 'Karl', sans-serif; */
 }
 
@@ -15,6 +16,8 @@
 .text {
     padding-top: .75em;
     display: inline-block;
+    user-select: none;
+
 }
 
 
@@ -26,6 +29,8 @@
     left: 50%;
     transform: translateX(-50%);
     z-index: 9999;
+    user-select: none;
+
 
 }
 

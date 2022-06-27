@@ -75,7 +75,7 @@ export default function IndexPage({ data }) {
     if (typeof window) {
       const images = sortStringInts(data?.core?.edges);
       const vr = getRandVR();
-console.log(images)
+      console.log(images);
       if (window.innerWidth <= 768) {
         // mobile images
         images.map((img) => {
@@ -100,8 +100,8 @@ console.log(images)
           let mImg =
             img.node.childImageSharp.gatsbyImageData.images.sources[0].srcSet.split(
               ","
-            )[3];
-          mImg = mImg.split(" 1600w").join("");
+            )[2];
+          mImg = mImg.split(" ")[0];
           setAllImages(allImages.push(mImg));
           // setAllImages(allImages.push(img.node.publicURL));
         });
@@ -109,8 +109,8 @@ console.log(images)
           let mImg =
             img.node.childImageSharp.gatsbyImageData.images.sources[0].srcSet.split(
               ","
-            )[3];
-          mImg = mImg.split(" 1600w").join("");
+            )[2];
+          mImg = mImg.split(" ")[0]
           setAllImages(allImages.push(mImg));
           // setAllImages(allImages.push(img.node.publicURL));
         });
@@ -125,7 +125,7 @@ console.log(images)
       // console.log(window.scrollY)
     },
     // Delay in milliseconds or null to stop it
-    !playing && !ended && scrollY > 30 ? 30 : null
+    !mouseDown && !ended && scrollY > 30 ? 30 : null
   );
 
   useInterval(
@@ -187,6 +187,12 @@ console.log(images)
     setIntervalId(0);
   };
 
+  useEffect(()=>{
+    if(typeof window) {
+      window.scrollTo(0, 0);
+    }
+  }, [])
+
   useEffect(() => {
     if (!ended) {
       switch (scrollDirection) {
@@ -231,14 +237,13 @@ console.log(images)
                     playing={playing}
                     ended={ended}
                   />
-                  {allImages && (
-                    <CanvasSequence
-                      setEnded={setEnded}
-                      index={index}
-                      images={allImages}
-                      style={{ height: "100vh" }}
-                    />
-                  )}
+
+                  <CanvasSequence
+                    setEnded={setEnded}
+                    index={index}
+                    images={allImages}
+                    style={{ height: "100vh" }}
+                  />
                 </div>
                 <Content ended={ended} setEnded={setEnded} />
               </>

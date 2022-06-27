@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from "react";
-import { useSpring, config } from "react-spring";
+// import { useSpring, config } from "react-spring";
 import { drawImageCover, createLoadingQueue } from "../../lib/utils";
 import { TOTAL_COUNT } from "../../utils/settings";
 
@@ -20,13 +20,6 @@ const CanvasSequence = ({
   const loadedImages = useRef([]);
   const canvasRef = useRef(null);
   const containerRef = useRef(null);
-
-//   const [{ spring }, api] = useSpring(() => ({
-//     spring: 0,
-//     config: config.slow,
-//     onChange: () => draw(),
-//   }));
-
 
   const nearestLoadedImage = (target) => {
     const images = loadedImages.current;
@@ -57,6 +50,8 @@ const CanvasSequence = ({
     if (loadedImages.current[e]) {
       return loadNextImage();
     }
+
+    console.log('load next image')
 
     const onLoad = () => {
       img.removeEventListener("load", onLoad);
@@ -94,6 +89,17 @@ const CanvasSequence = ({
       if (starts === "out") u += clientHeight;
       if (ends === "in") d -= clientHeight;
       if (starts === "in") d -= clientHeight;
+      // start: out, ends: out
+      // const value = ((clientOffsety + clientHeight) - offsetY) / (clientHeight + elementHeight) * 100;
+
+      //start: in, ends: out
+      // const value = (clientOffsety - offsetY) / (elementHeight) * 100;
+
+      //start: out, ends: in
+      // const value = ((clientOffsety + clientHeight) - offsetY) / (elementHeight) * 100;
+
+      // Start: in, ends: in
+      // (clientOffsety - offsetY) / (elementHeight - clientHeight)
 
       const value = u / d;
       return value > 1 ? 1 : value < 0 ? 0 : value;
@@ -101,7 +107,7 @@ const CanvasSequence = ({
   };
 
   useEffect(()=>{
-    draw();
+    // draw();
     if(index >= TOTAL_COUNT) {
         setEnded(true);
     } else {

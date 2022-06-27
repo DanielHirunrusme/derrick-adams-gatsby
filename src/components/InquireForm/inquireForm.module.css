@@ -67,6 +67,7 @@
 
 .table td:not(.tdPadding) {
     padding: 0 !important;
+    border-right: .15em solid black;
 }
 
 .tdPadding {

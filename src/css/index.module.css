@@ -381,7 +381,9 @@
   .header::before {
     background: transparent;
   }
+
   .headerSticky::before {
+    background: black;
     bottom: "auto";
     top: 0;
   }

@@ -95,8 +95,8 @@ const Content = ({ ended, setEnded, index }) => {
                 </tr>
               </tbody>
             </table>
-            <article className={s.gallery} id="Gallery">
-              <h2>Gallery</h2>
+            {/* <article className={s.gallery} id="Gallery">
+              <h2>Galle<span style={{ letterSpacing: "0em"}}>r</span>y</h2>
               <div className={s.galleryGrid}>
                 <div></div>
                 <div></div>
@@ -105,7 +105,7 @@ const Content = ({ ended, setEnded, index }) => {
                 <div></div>
                 <div></div>
               </div>
-            </article>
+            </article> */}
             <article className={s.purchase} id="Purchase">
               <h2>Purchase</h2>
               <InquireForm />
