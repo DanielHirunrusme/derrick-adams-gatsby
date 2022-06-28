@@ -63,7 +63,7 @@ const Content = ({ ended, setEnded, index }) => {
                   </td>
                   <td>
                     <p>
-                      37 9/16” tall <sup>(seat is 21 1/8”)</sup>, 43 7/16” long, 8” wide
+                      37 9/16” tall (seat is 21 1/8”), 43 7/16” long, 8” wide
                     </p>
                   </td>
                 </tr>

@@ -1,7 +1,7 @@
 .root {
     margin-top: 100vh;
     padding: 0 30px;
-    margin-bottom: 60px;
+    padding-bottom: 60px;
     position: relative;
     z-index: 99;
     background: linear-gradient(0deg, rgba(255,255,255,1) 67%, rgba(255,255,255,0) 100%);
@@ -93,7 +93,7 @@
     width: 100%;
     height: 50vh;
     background: gray;
-    border-radius: .15em;
+    /* border-radius: .15em; */
     position: relative;
 }
 
@@ -114,8 +114,17 @@
     margin: 0;
 }
 
+.galleryFull {
+    padding-bottom: 1em;
+}
+
 .galleryFull img {
     width: 100%;
+}
+
+.galleryFull img, .galleryGrid div {
+    border-radius: .15em;
+    overflow: hidden;
 }
 
 .backToTop {
@@ -129,6 +138,11 @@
 }
 
 @media screen and (min-width: 768px) {
+
+    .galleryFull {
+        padding-bottom: 0;
+    }
+
     .backToTop {
         padding-top: 0;
         padding-bottom: 4em;
