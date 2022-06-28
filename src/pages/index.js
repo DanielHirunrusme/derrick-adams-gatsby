@@ -14,6 +14,7 @@ import { Stage, Layer, Image as KonvaImage } from "react-konva";
 import { useScrollDirection } from "use-scroll-direction";
 import useInterval from "../utils/useInterval";
 import { MAIN_COUNT, VR_COUNT, TOTAL_COUNT } from "../utils/settings";
+import Seo from "../components/Seo";
 
 const sortStringInts = (array) => {
   array.sort(function (a, b) {
@@ -110,7 +111,7 @@ export default function IndexPage({ data }) {
             img.node.childImageSharp.gatsbyImageData.images.sources[0].srcSet.split(
               ","
             )[2];
-          mImg = mImg.split(" ")[0]
+          mImg = mImg.split(" ")[0];
           setAllImages(allImages.push(mImg));
           // setAllImages(allImages.push(img.node.publicURL));
         });
@@ -154,13 +155,13 @@ export default function IndexPage({ data }) {
     }
   };
 
-  const onMouseMove = (e) => {
-    if (typeof window) {
-      window.innerWidth > 768
-        ? setMouseCoordinates({ x: e.clientX, y: e.clientY })
-        : setMouseCoordinates({ x: "auto", y: "auto" });
-    }
-  };
+  // const onMouseMove = (e) => {
+  //   if (typeof window) {
+  //     window.innerWidth > 768
+  //       ? setMouseCoordinates({ x: e.clientX, y: e.clientY })
+  //       : setMouseCoordinates({ x: "auto", y: "auto" });
+  //   }
+  // };
 
   const onVrEnded = () => {
     setVrEnded(true);
@@ -187,11 +188,11 @@ export default function IndexPage({ data }) {
     setIntervalId(0);
   };
 
-  useEffect(()=>{
-    if(typeof window) {
+  useEffect(() => {
+    if (typeof window) {
       window.scrollTo(0, 0);
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
     if (!ended) {
@@ -212,7 +213,15 @@ export default function IndexPage({ data }) {
   }, [scrollDirection]);
 
   return (
-    <main onMouseMove={onMouseMove} className={s.main}>
+    <main id="Top" className={s.main}>
+      <Seo
+      title="FUNTIME UNICORN"
+        description="FUNTIME UNICORN builds off Derrick Adams’ signature iconography
+                and imagery via a continuation of the artist's acclaimed Floater
+                paintings — a collection of vivid portraits that show Black
+                people in various states of rest and play atop the popularized
+                plastic pool float."
+      />
       <Controller>
         <Scene duration="4000%">
           {(progress) => {

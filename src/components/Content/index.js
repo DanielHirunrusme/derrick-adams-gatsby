@@ -6,6 +6,7 @@ import Title from "../Title";
 import cx from "classnames";
 import Sparkles from "react-sparkle";
 import InquireForm from "../InquireForm";
+import { AnchorLink } from "gatsby-plugin-anchor-links";
 
 const Content = ({ ended, setEnded, index }) => {
   return (
@@ -28,14 +29,14 @@ const Content = ({ ended, setEnded, index }) => {
               <p>
                 FUNTIME UNICORN builds off Derrick Adams’ signature iconography
                 and imagery via a continuation of the artist's acclaimed Floater
-                paintings -- a collection of vivid portraits that show Black
-                people in various states of rest and play atop the popularized
-                plastic pool float. An ode to the Black Unicorn figure first
-                appearing in the Floater paintings, then realized as life-size
-                inflatable pool floats, Funtime Unicorn in this latest iteration
-                is a manifestation of Adams' conviction. The idea that Black
-                joy, love, and play should be normalized and celebrated in
-                popular visual culture.
+                paintings &mdash; a collection of vivid portraits that show
+                Black people in various states of rest and play atop the
+                popularized plastic pool float. An ode to the Black Unicorn
+                figure first appearing in the Floater paintings, then realized
+                as life-size inflatable pool floats, Funtime Unicorn in this
+                latest iteration is a manifestation of Adams' conviction. The
+                idea that Black joy, love, and play should be normalized and
+                celebrated in popular visual culture.
               </p>
             </article>
             <table className={s.table}>
@@ -95,20 +96,36 @@ const Content = ({ ended, setEnded, index }) => {
                 </tr>
               </tbody>
             </table>
-            {/* <article className={s.gallery} id="Gallery">
-              <h2>Galle<span style={{ letterSpacing: "0em"}}>r</span>y</h2>
-              <div className={s.galleryGrid}>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
+            <article className={s.gallery} id="Gallery">
+              <h2>
+                Galle<span style={{ letterSpacing: "0em" }}>r</span>y
+              </h2>
+              <div>
+                <div className={s.galleryFull}>
+                  <img src="/interior.jpg" alt="Interior" />
+                </div>
+                <div className={s.galleryGrid}>
+                  <div>
+                    <img src="/park-2.jpg" alt="Park 2" />
+                  </div>
+                  <div>
+                    <img src="/park-1.jpg" alt="Park 1" />
+                  </div>
+                </div>
               </div>
-            </article> */}
+            </article>
             <article className={s.purchase} id="Purchase">
               <h2>Purchase</h2>
               <InquireForm />
+            </article>
+            <article className={s.backToTop}>
+            <AnchorLink
+              to="/#Top"
+              title="Back?"
+              className="stripped h2"
+              stripHash
+              // onAnchorLinkClick={anchorLinkClicked}
+            />
             </article>
           </section>
         </div>

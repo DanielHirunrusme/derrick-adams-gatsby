@@ -5,6 +5,7 @@ import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import Sparkles from "react-sparkle";
 import { TOTAL_COUNT } from "../utils/settings";
+import { AnchorLink } from "gatsby-plugin-anchor-links";
 
 const Button = ({
   progress,
@@ -15,7 +16,7 @@ const Button = ({
   playing,
   vrEnded,
   mouseCoordinates,
-  ended
+  ended,
 }) => {
   const [sparkleCount, setSparkleCount] = useState(6);
   const [sparkleSpeed, setSparkleSpeed] = useState(20);
@@ -28,26 +29,25 @@ const Button = ({
   useEffect(() => {
     playing ? setSparkleCount(32) : setSparkleCount(6);
     playing ? setSparkleSpeed(40) : setSparkleSpeed(20);
-
   }, [playing]);
-  if(!ended) {
-  return (
-    <div
-      onTouchStart={onTouchStart}
-      onTouchEnd={onTouchEnd}
-      onMouseDown={onMouseDown}
-      onMouseUp={onMouseUp}
-      className={s.root}
-    >
-      <div className={s.buttonHolder}>
-        <button className={cx(s.button, { [s.buttonPlaying]: playing })} />
-        <CircularProgressbar
-          className={s.loader}
-          strokeWidth={playing ? 4 : 4}
-          value={percent}
-          maxValue={TOTAL_COUNT}
-        />
-        <Sparkles
+  if (!ended) {
+    return (
+      <div
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
+        onMouseDown={onMouseDown}
+        onMouseUp={onMouseUp}
+        className={s.root}
+      >
+        <div className={s.buttonHolder}>
+          <button className={cx(s.button, { [s.buttonPlaying]: playing })} />
+          <CircularProgressbar
+            className={s.loader}
+            strokeWidth={playing ? 4 : 4}
+            value={percent}
+            maxValue={TOTAL_COUNT}
+          />
+          <Sparkles
             color={"#F2F1EF"}
             flicker={false}
             fadeOutSpeed={sparkleSpeed}
@@ -55,13 +55,16 @@ const Button = ({
             minSize={4}
             maxSize={8}
           />
+        </div>
+        <span className={cx(s.text, { [s.textPlaying]: playing })}>
+          {!vrEnded ? "Play" : "Replay?"}
+        </span>
       </div>
-      <span className={cx(s.text, { [s.textPlaying]: playing })}>
-        {!vrEnded ? "Play" : "Replay?"}
-      </span>
-    </div>
-  ) } else {
-    return <></>
+    );
+  } else {
+    return (
+      <></>
+    );
   }
 };
 

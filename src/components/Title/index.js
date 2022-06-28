@@ -32,14 +32,14 @@ const Title = ({
               stripHash
               onAnchorLinkClick={anchorLinkClicked}
             />
-            {/* ,&nbsp;
+            ,&nbsp;
             <AnchorLink
               to="/#Gallery"
               title="Gallery"
               className="stripped"
               stripHash
               onAnchorLinkClick={anchorLinkClicked}
-            /> */}
+            />
             ,&nbsp;
             <AnchorLink
               to="/#Purchase"
@@ -49,7 +49,7 @@ const Title = ({
               onAnchorLinkClick={anchorLinkClicked}
             />
             <div className={s.external}>
-              <a href="http://www.derrickadams.com/" target="blank">
+              <a title="Derrick Adams Website" href="http://www.derrickadams.com/" target="blank">
                 <svg
                   width="1em"
                   viewBox="0 0 467 474"
@@ -63,7 +63,7 @@ const Title = ({
                 </svg>
               </a>
 
-              <a href="https://www.instagram.com/derrickadamsny" target="blank">
+              <a title="Derrick Adams Instagram" href="https://www.instagram.com/derrickadamsny" target="blank">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="1em"
@@ -186,6 +186,8 @@ const Title = ({
             >
               by Derrick Adams
             </p>
+            {/* {!sticky && <div className={s.bgImage}><img src="/on-white.jpg" alt="Funtime Unicorn" /></div>} */}
+
           </div>
         </div>
       </section>

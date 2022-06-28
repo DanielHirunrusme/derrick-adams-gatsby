@@ -94,6 +94,16 @@
     height: 50vh;
     background: gray;
     border-radius: .15em;
+    position: relative;
+}
+
+.galleryGrid img {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    object-fit: cover;
 }
 
 .galleryGrid div:not(:last-child) {
@@ -104,7 +114,26 @@
     margin: 0;
 }
 
+.galleryFull img {
+    width: 100%;
+}
+
+.backToTop {
+    padding-top: 4em;
+    padding-bottom: 0em;
+    text-align: center;
+}
+
+.backToTop a {
+    color: #000;
+}
+
 @media screen and (min-width: 768px) {
+    .backToTop {
+        padding-top: 0;
+        padding-bottom: 4em;
+    }
+
     .about, .purchase, .gallery {
         padding-top: 3em;
     }
@@ -125,6 +154,8 @@
         /* overflow-x: scroll; */
         /* margin: 0 -60px; */
     }
+
+   
 
     .galleryGrid div {
         /* flex: 0 0 33.33vw; */

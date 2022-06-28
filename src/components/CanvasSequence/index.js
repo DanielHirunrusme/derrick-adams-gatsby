@@ -43,7 +43,12 @@ const CanvasSequence = ({
   }
 
   const loadNextImage = () => {
-    if (loadingQueue.current.length === 0) return; // queue is empty, finished loading
+    if (loadingQueue.current.length === 0) {
+      console.log('done loading')
+      return; // queue is empty, finished loading
+    } else {
+      console.log(loadingQueue.current.length)
+    }
     const e = loadingQueue.current.shift();
 
     // check if image has already been loaded
@@ -166,9 +171,9 @@ const CanvasSequence = ({
       >
         <canvas ref={canvasRef} />
       </div>
-      <div style={{ position: "relative", ...style }} {...rest}>
+      {/* <div style={{ position: "relative", ...style }} {...rest}>
         {children}
-      </div>
+      </div> */}
     </div>
   );
 };

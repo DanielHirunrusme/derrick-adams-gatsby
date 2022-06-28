@@ -150,7 +150,7 @@ ul li {
   list-style: none;
 }
 
-h2 {
+h2, .h2 {
   margin: 0;
   font-size: 10.875vw;
   letter-spacing: -0.07em;
