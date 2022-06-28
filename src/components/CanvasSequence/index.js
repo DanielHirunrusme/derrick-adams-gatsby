@@ -51,7 +51,7 @@ const CanvasSequence = ({
       return loadNextImage();
     }
 
-    console.log("load next image");
+    // console.log("load next image");
 
     const onLoad = () => {
       img.removeEventListener("load", onLoad);

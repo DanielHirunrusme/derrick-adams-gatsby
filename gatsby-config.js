@@ -1,3 +1,5 @@
+require("dotenv").config()
+
 module.exports = {
   siteMetadata: {
     title: `Derrick Adams Editions`,
@@ -17,6 +19,26 @@ module.exports = {
         display: "standalone",
         icon: "src/images/icon.jpg", // This path is relative to the root of the site.
         // crossOrigin: `use-credentials`,
+      },
+    },
+    // {
+    //   resolve: `gatsby-plugin-shopify-buy`,
+    //   options: {
+    //     stores: {
+    //       editions: {
+    //         domain: process.env.GATSBY_MYSHOPIFY_URL,
+    //         accessToken: process.env.SHOPIFY_APP_PASSWORD,
+    //       },
+    //     }
+    //   }
+    // },
+    {
+      resolve: "gatsby-source-shopify",
+      options: {
+        password: process.env.SHOPIFY_APP_PASSWORD,
+        storeUrl: process.env.GATSBY_MYSHOPIFY_URL,
+        downloadImages: false,
+        salesChannel: process.env.SHOPIFY_APP_ID, // Optional but recommended
       },
     },
     "gatsby-plugin-styled-components",

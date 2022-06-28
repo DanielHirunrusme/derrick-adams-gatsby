@@ -7,6 +7,7 @@ import cx from "classnames";
 import Sparkles from "react-sparkle";
 import InquireForm from "../InquireForm";
 import { AnchorLink } from "gatsby-plugin-anchor-links";
+import ShopifyBuy from "../ShopifyBuy";
 
 const Content = ({ ended, setEnded, index }) => {
   return (
@@ -116,7 +117,8 @@ const Content = ({ ended, setEnded, index }) => {
             </article>
             <article className={s.purchase} id="Purchase">
               <h2>Purchase</h2>
-              <InquireForm />
+              <ShopifyBuy />
+              {/* <InquireForm /> */}
             </article>
             <article className={s.backToTop}>
             <AnchorLink

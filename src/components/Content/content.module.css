@@ -47,8 +47,12 @@
     color: black;
     border-radius: .15em;
     text-align: center;
+    margin-top: 1em;
 }
 
+.purchase a:hover {
+    background: #ffd600;
+}
 
 .root table {
     /* overflow: hidden; */

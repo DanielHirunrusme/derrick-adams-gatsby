@@ -3,11 +3,11 @@
 }
 
 .form {
-
+    padding-top: 2em;
 }
 
 @media screen and (min-width: 768px) {
-    .form {
+    .root {
         max-width: 75%;
         margin: 0 auto;
     }
@@ -46,6 +46,7 @@
 .submitButton:hover {
     background: #ffd600;
 }
+
 
 .errorMessage {
 
@@ -94,10 +95,15 @@
 
 @media screen and (min-width: 600px) { 
 
+    
+.productDetails {
+    max-width: 360px;
+}
+
     .productImage {
         border-left: .15em solid black;
         border-bottom: 0;
-        max-width: 200px;
+        max-width: 220px;
         padding-left: .25em;
         padding-bottom: 0;
         margin-bottom: .375em;
@@ -109,7 +115,7 @@
     flex-direction: column;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 600px) {
     .productCell {
         justify-content: space-between;
         flex-direction: row-reverse;

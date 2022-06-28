@@ -5,7 +5,7 @@ import Sparkles from "react-sparkle";
 
 const ENDPOINT = "https://getform.io/f/d5a5e5cc-1ab0-4319-a0ab-34d87952085b";
 
-const InquireForm = () => {
+const InquireForm = ({ showForm = false, children }) => {
   const [submitted, setSubmitted] = useState(false);
   const [formStatus, setFormStatus] = useState(false);
   const [query, setQuery] = useState({
@@ -53,142 +53,163 @@ const InquireForm = () => {
   };
   return (
     <div className={s.root}>
-      {!formStatus ? (
-        <form className={s.form} onSubmit={handleSubmit}>
-          {/* <span className="small">Fields marked with an *asterisk are required.</span> */}
-
-          <table className={s.table}>
-            <tr>
-              <td>
-                <div className={s.productCell}>
-                  <img
-                    src="/product-image.jpg"
-                    width="100%"
-                    alt="Funtime Unicorn"
-                    className={s.productImage}
-                  />
-                  <div className={s.tdPadding}>
-                    <p>
-                      FUNTIME UNICORN
-                      <br />
-                      $50,000 USD
-                    </p>
-                    <br />
-                    <p className="small">
-                      Shipping is not included.
-                      <br />
-                      Additional taxes may apply.
-                    </p>
-                  </div>
+      <table className={s.table}>
+        <tr>
+          <td>
+            <div className={s.productCell}>
+              <img
+                src="/product-image.jpg"
+                width="100%"
+                alt="Funtime Unicorn"
+                className={s.productImage}
+              />
+              <div className={s.tdPadding}>
+                <p>
+                  FUNTIME UNICORN
+                  <br />
+                  $50,000 USD
+                </p>
+                <br />
+                <div className={s.productDetails}>
+                <p className="small">
+                  Price excludes shipping, taxes and installation fees. Upon purchase, a member of our team will reach out to provide
+                  more details. No refund policy.
+                </p>
                 </div>
-              </td>
-            </tr>
-            <tr className={s.fieldWrap}>
-              <td colspan="2">
-                {/* <label htmlFor="email">Email address</label> */}
-                <input
-                  required
-                  type="email"
-                  className={s.input}
-                  id="email"
-                  placeholder="Email address*"
-                  name="email"
-                  value={query.email}
-                  onChange={handleChange()}
-                />
-              </td>
-            </tr>
-            <tr className={s.fieldWrap}>
-              <td colspan="2">
-                {/* <label htmlFor="name">Name</label> */}
-                <input
-                  type="text"
-                  className={s.input}
-                  id="name"
-                  placeholder="Your name*"
-                  required
-                  name="name"
-                  value={query.name}
-                  onChange={handleChange()}
-                />
-              </td>
-            </tr>
-            <tr className={s.fieldWrap}>
-              <td colspan="2">
-                <input
-                  type="text"
-                  className={s.input}
-                  id="phone"
-                  placeholder="Phone number"
-                  required
-                  name="phone"
-                  value={query.phone}
-                  onChange={handleChange()}
-                />
-              </td>
-            </tr>
-            <tr className={s.fieldWrap}>
-              <td colspan="2">
-                {/* <label htmlFor="subject">Subject (optional)</label> */}
-                <input
-                  type="text"
-                  className={s.input}
-                  id="subject"
-                  placeholder="Subject"
-                  required
-                  name="subject"
-                  value={query.subject}
-                  onChange={handleChange()}
-                />
-              </td>
-            </tr>
-            <tr className={s.fieldWrap}>
-              <td colspan="2">
-                {/* <label htmlFor="message">Message</label> */}
-                <textarea
-                  id="message"
-                  required
-                  className={s.input}
-                  name="message"
-                  placeholder="Message"
-                  value={query.message}
-                  rows="5"
-                  onChange={handleChange()}
-                />
-              </td>
-            </tr>
-          </table>
-          {/* <div className="small">
+              </div>
+            </div>
+          </td>
+        </tr>
+      </table>
+      {/* <br /> */}
+      <div>{children}</div>
+
+      {showForm ? (
+        !formStatus ? (
+          <form className={s.form} onSubmit={handleSubmit}>
+            <h2>Inquire</h2>
+
+            {/* <span className="small">Fields marked with an *asterisk are required.</span> */}
+
+            <table className={s.table}>
+              <tr>
+                <td>
+                  <div className={s.tdPadding}>
+                    Have a question or interested in purchasing Funtime Unicorn
+                    and need help? Please fill out the form below and we will be
+                    in touch.
+                  </div>
+                </td>
+              </tr>
+              <tr className={s.fieldWrap}>
+                <td colspan="2">
+                  {/* <label htmlFor="email">Email address</label> */}
+                  <input
+                    required
+                    type="email"
+                    className={s.input}
+                    id="email"
+                    placeholder="Email address*"
+                    name="email"
+                    value={query.email}
+                    onChange={handleChange()}
+                  />
+                </td>
+              </tr>
+              <tr className={s.fieldWrap}>
+                <td colspan="2">
+                  {/* <label htmlFor="name">Name</label> */}
+                  <input
+                    type="text"
+                    className={s.input}
+                    id="name"
+                    placeholder="Your name*"
+                    required
+                    name="name"
+                    value={query.name}
+                    onChange={handleChange()}
+                  />
+                </td>
+              </tr>
+              <tr className={s.fieldWrap}>
+                <td colspan="2">
+                  <input
+                    type="text"
+                    className={s.input}
+                    id="phone"
+                    placeholder="Phone number"
+                    required
+                    name="phone"
+                    value={query.phone}
+                    onChange={handleChange()}
+                  />
+                </td>
+              </tr>
+              <tr className={s.fieldWrap}>
+                <td colspan="2">
+                  {/* <label htmlFor="subject">Subject (optional)</label> */}
+                  <input
+                    type="text"
+                    className={s.input}
+                    id="subject"
+                    placeholder="Subject"
+                    required
+                    name="subject"
+                    value={query.subject}
+                    onChange={handleChange()}
+                  />
+                </td>
+              </tr>
+              <tr className={s.fieldWrap}>
+                <td colspan="2">
+                  {/* <label htmlFor="message">Message</label> */}
+                  <textarea
+                    id="message"
+                    required
+                    className={s.input}
+                    name="message"
+                    placeholder="Message"
+                    value={query.message}
+                    rows="5"
+                    onChange={handleChange()}
+                  />
+                </td>
+              </tr>
+            </table>
+            {/* <div className="small">
             <label><input type="checkbox" />Sign me up to receive news about Derrick Adams.</label>
           </div> */}
-          <div className={s.errorMessage}>
-            {formStatus ? (
-              <span>Thank you. Your message has been sent.</span>
-            ) : (
-              ""
-            )}
-          </div>
+            <div className={s.errorMessage}>
+              {formStatus ? (
+                <span>Thank you. Your message has been sent.</span>
+              ) : (
+                ""
+              )}
+            </div>
 
-          <div style={{ position: "relative" }}>
-            <button className={s.submitButton} type="submit" bg="transparent">
-              Submit Inquiry
-            </button>
-            <Sparkles
-              color={"#F2F1EF"}
-              flicker={false}
-              fadeOutSpeed={60}
-              count={8}
-              minSize={4}
-              maxSize={8}
-            />
-          </div>
-          <br />
-          <span className="small">
-            By submitting the form you agree to be contacted.
-          </span>
-        </form>
+            <div style={{ position: "relative" }}>
+              <button className={s.submitButton} type="submit" bg="transparent">
+                Submit Inquiry
+              </button>
+              <Sparkles
+                color={"#F2F1EF"}
+                flicker={false}
+                fadeOutSpeed={60}
+                count={8}
+                minSize={4}
+                maxSize={8}
+              />
+            </div>
+            <br />
+            <span className="small">
+              By submitting the form you agree to be contacted.
+            </span>
+          </form>
+        ) : (
+          <div className={s.successMessage}>Your inquiry has been sent.</div>
+        )
       ) : (
-        <div className={s.successMessage}>Your inquiry has been sent.</div>
+        <></>
       )}
     </div>
   );
