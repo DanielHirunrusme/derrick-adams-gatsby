@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Client from "shopify-buy";
 import InquireForm from "../InquireForm";
 import Sparkles from "react-sparkle";
-
+import * as s from "./ShopifyBuy.module.css"
 
 const ShopifyBuy = () => {
   // Fetch a single product by Handle
@@ -93,7 +93,7 @@ const ShopifyBuy = () => {
     } else {
       return (
         <InquireForm showForm={true}>
-          <button type="button" disabled>
+          <button className={s.button}  type="button" disabled>
             Sold Out
           </button>
         </InquireForm>

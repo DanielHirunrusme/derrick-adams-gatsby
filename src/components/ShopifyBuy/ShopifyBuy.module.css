@@ -1,0 +1,12 @@
+.button:disabled {
+    padding: 1em;
+    background-color: #ccc;
+    display: block;
+    color: black;
+    border-radius: .15em;
+    text-align: center;
+    margin-top: 1em;
+    width: 100%;
+    pointer-events: none;
+    cursor: no-allowed;
+}

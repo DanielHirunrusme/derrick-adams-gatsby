@@ -95,9 +95,7 @@ const InquireForm = ({ showForm = false, children }) => {
               <tr>
                 <td>
                   <div className={s.tdPadding}>
-                    Have a question or interested in purchasing Funtime Unicorn
-                    and need help? Please fill out the form below and we will be
-                    in touch.
+                    Have a question? Please inquire below and we will be in touch.
                   </div>
                 </td>
               </tr>
