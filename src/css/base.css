@@ -29,7 +29,7 @@ body {
   letter-spacing: -0.02em;
   /* font-family: "sofia-pro-soft"; */
   /* font-weight: 700; */
-  font-family: "Alte Haas Grotesk";
+  font-family: "Alte Haas Grotesk", Helvetia, Arial, sans-serif;
   font-weight: bold;
 }
 
@@ -158,9 +158,13 @@ h2, .h2 {
   margin-bottom: .5em;
 }
 
+article p:first-of-type {
+  margin-top: 0;
+}
+
 @media screen and (min-width: 768px) {
   h2 {
-    margin-bottom: 0.125em;
+    margin-bottom: 0;
   }
 }
 

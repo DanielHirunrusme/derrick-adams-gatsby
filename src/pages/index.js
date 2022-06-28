@@ -199,9 +199,13 @@ export default function IndexPage({ data }) {
       switch (scrollDirection) {
         case "DOWN":
           setPlaying(true);
+          setMouseDown(true);
+          setTitle(false);
           break;
         case "UP":
           setPlaying(false);
+          setMouseDown(false);
+          setTitle(true);
           break;
         case "NONE":
           setPlaying(false);
