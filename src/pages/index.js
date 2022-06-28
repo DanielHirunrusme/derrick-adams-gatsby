@@ -212,6 +212,12 @@ export default function IndexPage({ data }) {
     }
   }, [scrollDirection]);
 
+  const onClick = () => {
+    setPlaying(!playing);
+    setMouseDown(!mouseDown);
+    setTitle(!title);
+  }
+
   return (
     <main id="Top" className={s.main}>
       <Seo
@@ -237,11 +243,12 @@ export default function IndexPage({ data }) {
                     index={index}
                   />
                   <Button
-                    onTouchStart={onMouseDown}
-                    onTouchEnd={onMouseUp}
-                    onMouseDown={onMouseDown}
-                    onMouseUp={onMouseUp}
-                    mouseCoordinates={mouseCoordinates}
+                    // onTouchStart={onMouseDown}
+                    // onTouchEnd={onMouseUp}
+                    // onMouseDown={onMouseDown}
+                    // onMouseUp={onMouseUp}
+                    onClick={onClick}
+                    // mouseCoordinates={mouseCoordinates}
                     progress={progress}
                     index={index}
                     playing={playing}

@@ -12,6 +12,7 @@ const Button = ({
   onMouseDown,
   onMouseUp,
   onTouchEnd,
+  onClick,
   playing,
   vrEnded,
   mouseCoordinates,
@@ -37,6 +38,7 @@ const Button = ({
         onTouchEnd={onTouchEnd}
         onMouseDown={onMouseDown}
         onMouseUp={onMouseUp}
+        onClick={onClick}
         className={s.root}
       >
         <div className={s.buttonHolder}>
