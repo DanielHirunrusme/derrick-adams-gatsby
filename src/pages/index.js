@@ -228,7 +228,7 @@ export default function IndexPage({ data }) {
             let index = Math.round(progress * 1 * TOTAL_COUNT);
             return (
               <>
-                <div style={{ height: "4000vh", position: "relative" }}>
+                <div style={{ height: "4000vh", position: "relative", background: "black" }}>
                   <Title
                     playing={playing}
                     setEnded={setEnded}
@@ -243,6 +243,7 @@ export default function IndexPage({ data }) {
                     onMouseUp={onMouseUp}
                     mouseCoordinates={mouseCoordinates}
                     progress={progress}
+                    index={index}
                     playing={playing}
                     ended={ended}
                   />

@@ -9131,6 +9131,13 @@ rc@1.2.8, rc@^1.2.7, rc@^1.2.8:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-canvas-image-sequence@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/react-canvas-image-sequence/-/react-canvas-image-sequence-1.0.1.tgz#c894fd967d3b788587f6bcf55c3843b301cf13ea"
+  integrity sha512-eTfXBAUY1yaBAPHptL/JBc/SeUrfDrUS1DauHf5+lgD9QEBylFhT4296VH32xkuW0X/4LFOCLo+TQS8j2d60cQ==
+  dependencies:
+    prop-types "^15.7.2"
+
 react-circular-progressbar@^2.0.4:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/react-circular-progressbar/-/react-circular-progressbar-2.0.4.tgz#5b04a9cf6be8c522c180e4e99ec6db63677335b0"

@@ -5,7 +5,6 @@ import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import Sparkles from "react-sparkle";
 import { TOTAL_COUNT } from "../utils/settings";
-import { AnchorLink } from "gatsby-plugin-anchor-links";
 
 const Button = ({
   progress,
@@ -30,6 +29,7 @@ const Button = ({
     playing ? setSparkleCount(32) : setSparkleCount(6);
     playing ? setSparkleSpeed(40) : setSparkleSpeed(20);
   }, [playing]);
+
   if (!ended) {
     return (
       <div
@@ -43,7 +43,7 @@ const Button = ({
           <button className={cx(s.button, { [s.buttonPlaying]: playing })} />
           <CircularProgressbar
             className={s.loader}
-            strokeWidth={playing ? 4 : 4}
+            strokeWidth={4}
             value={percent}
             maxValue={TOTAL_COUNT}
           />

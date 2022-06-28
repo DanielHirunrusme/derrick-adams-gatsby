@@ -29,7 +29,7 @@ const Content = ({ ended, setEnded, index }) => {
               <p>
                 FUNTIME UNICORN builds off Derrick Adams’ signature iconography
                 and imagery via a continuation of the artist's acclaimed Floater
-                paintings &mdash; a collection of vivid portraits that show
+                paintings&mdash;a collection of vivid portraits that show
                 Black people in various states of rest and play atop the
                 popularized plastic pool float. An ode to the Black Unicorn
                 figure first appearing in the Floater paintings, then realized
@@ -63,7 +63,7 @@ const Content = ({ ended, setEnded, index }) => {
                   </td>
                   <td>
                     <p>
-                      37 9/16” tall (seat is 21 1/8”), 43 7/16” long, 8” wide
+                      37 9/16” tall <sup>(seat is 21 1/8”)</sup>, 43 7/16” long, 8” wide
                     </p>
                   </td>
                 </tr>

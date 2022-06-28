@@ -226,6 +226,7 @@
 .header a:hover {
   border-bottom: 0.15em solid;
   border-position: 1em;
+  /* border-radius: 1em; */
 }
 
 .headerSticky,

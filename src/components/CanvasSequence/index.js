@@ -33,7 +33,7 @@ const CanvasSequence = ({
   function draw() {
     // console.log("index", index);
     if (canvasRef?.current?.getContext("2d")) {
-        // const val = ~~spring.get();
+      // const val = ~~spring.get();
       const ctx = canvasRef.current.getContext("2d");
       const image = nearestLoadedImage(index);
       if (image?.width) {
@@ -43,12 +43,7 @@ const CanvasSequence = ({
   }
 
   const loadNextImage = () => {
-    if (loadingQueue.current.length === 0) {
-      console.log('done loading')
-      return; // queue is empty, finished loading
-    } else {
-      console.log(loadingQueue.current.length)
-    }
+    if (loadingQueue.current.length === 0) return; // queue is empty, finished loading
     const e = loadingQueue.current.shift();
 
     // check if image has already been loaded
@@ -56,7 +51,7 @@ const CanvasSequence = ({
       return loadNextImage();
     }
 
-    console.log('load next image')
+    console.log("load next image");
 
     const onLoad = () => {
       img.removeEventListener("load", onLoad);
@@ -65,13 +60,15 @@ const CanvasSequence = ({
       if (e === 0) {
         draw();
       }
-      loadNextImage();
+      // loadNextImage();
     };
 
     // prepare the image
     const img = new Image();
     img.addEventListener("load", onLoad);
     img.src = images[e];
+
+    loadNextImage();
   };
 
   const getPercentScrolled = () => {
@@ -111,24 +108,24 @@ const CanvasSequence = ({
     }
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     // draw();
-    if(index >= TOTAL_COUNT) {
-        setEnded(true);
+    if (index >= TOTAL_COUNT) {
+      setEnded(true);
     } else {
-        setEnded(false);
+      setEnded(false);
     }
-  }, [index])
+  }, [index]);
 
   useEffect(() => {
     if (canvasRef.current) {
       // Start loading images
       loadNextImage();
 
-    //   const handleScroll = (e) => {
-    //     const percent = getPercentScrolled();
-    //     api.start({ spring: percent * images.length });
-    //   };
+      //   const handleScroll = (e) => {
+      //     const percent = getPercentScrolled();
+      //     api.start({ spring: percent * images.length });
+      //   };
 
       // Handle resize
       function updateSize() {
@@ -144,10 +141,10 @@ const CanvasSequence = ({
         draw();
       }
       window.addEventListener("resize", updateSize);
-    //   window.addEventListener("scroll", handleScroll);
+      //   window.addEventListener("scroll", handleScroll);
       updateSize();
 
-    //   console.log(createLoadingQueue(20));
+      //   console.log(createLoadingQueue(20));
       return () => {
         window.removeEventListener("resize", updateSize);
       };
