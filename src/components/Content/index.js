@@ -12,6 +12,9 @@ import { GatsbyImage } from "gatsby-plugin-image";
 
 const Content = ({ ended, gallery, setEnded, index }) => {
   console.log({ gallery });
+  const anchorLinkClicked = () => {
+    setEnded(true)
+  }
   return (
     <article className={s.root}>
       <div>
@@ -206,7 +209,7 @@ const Content = ({ ended, gallery, setEnded, index }) => {
                 title="Back?"
                 className="stripped h2"
                 stripHash
-                // onAnchorLinkClick={anchorLinkClicked}
+                onAnchorLinkClick={anchorLinkClicked}
               />
             </article>
           </section>

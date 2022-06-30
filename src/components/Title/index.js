@@ -19,10 +19,7 @@ const Title = ({
     <>
       {sticky && (
         <header
-          className={cx(
-            s.header,
-            { [s.headerSticky]: index >= TOTAL_COUNT }
-          )}
+          className={cx(s.header, { [s.headerSticky]: index >= TOTAL_COUNT })}
         >
           <nav className={s.headerInner}>
             <AnchorLink
@@ -49,7 +46,11 @@ const Title = ({
               onAnchorLinkClick={anchorLinkClicked}
             />
             <div className={s.external}>
-              <a title="Derrick Adams Website" href="http://www.derrickadams.com/" target="blank">
+              <a
+                title="Derrick Adams Website"
+                href="http://www.derrickadams.com/"
+                target="blank"
+              >
                 <svg
                   width="1em"
                   viewBox="0 0 467 474"
@@ -63,7 +64,11 @@ const Title = ({
                 </svg>
               </a>
 
-              <a title="Derrick Adams Instagram" href="https://www.instagram.com/derrickadamsny" target="blank">
+              <a
+                title="Derrick Adams Instagram"
+                href="https://www.instagram.com/derrickadamsny"
+                target="blank"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="1em"
@@ -81,21 +86,21 @@ const Title = ({
         </header>
       )}
       <section>
-        <div
-          className={cx(
-            s.title,
-            { [s.titleContent]: !sticky }
-            // { [s.titleHidden]: ended }
-          )}
+        <AnchorLink
+          to="/#About"
+          title="About Funtime Unicorn"
+          className="stripped"
+          stripHash
+          onAnchorLinkClick={anchorLinkClicked}
         >
-          <div>
-            <AnchorLink
-              to="/#About"
-              title="About"
-              className="stripped"
-              stripHash
-              onAnchorLinkClick={anchorLinkClicked}
-            >
+          <div
+            className={cx(
+              s.title,
+              { [s.titleContent]: !sticky }
+              // { [s.titleHidden]: ended }
+            )}
+          >
+            <div>
               <h1
                 className={cx(s.h1, {
                   [s.h1Hidden]: (playing && !ended) || (sticky && ended),
@@ -178,18 +183,18 @@ const Title = ({
                   N
                 </span>
               </h1>
-            </AnchorLink>
-            <p
-              className={cx(s.authorText, {
-                [s.authorTextHidden]: (sticky && playing) || (ended && sticky),
-              })}
-            >
-              by Derrick Adams
-            </p>
-            {/* {!sticky && <div className={s.bgImage}><img src="/on-white.jpg" alt="Funtime Unicorn" /></div>} */}
-
+              <p
+                className={cx(s.authorText, {
+                  [s.authorTextHidden]:
+                    (sticky && playing) || (ended && sticky),
+                })}
+              >
+                by Derrick Adams
+              </p>
+              {/* {!sticky && <div className={s.bgImage}><img src="/on-white.jpg" alt="Funtime Unicorn" /></div>} */}
+            </div>
           </div>
-        </div>
+        </AnchorLink>
       </section>
     </>
   );

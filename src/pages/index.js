@@ -158,14 +158,6 @@ export default function IndexPage({ data }) {
     }
   };
 
-  // const onMouseMove = (e) => {
-  //   if (typeof window) {
-  //     window.innerWidth > 768
-  //       ? setMouseCoordinates({ x: e.clientX, y: e.clientY })
-  //       : setMouseCoordinates({ x: "auto", y: "auto" });
-  //   }
-  // };
-
   const onVrEnded = () => {
     setVrEnded(true);
   };
