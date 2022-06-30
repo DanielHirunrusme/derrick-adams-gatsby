@@ -93,24 +93,8 @@
     padding-right: 1em;
 }
 
+
 .galleryGrid div {
-    width: 100%;
-    height: 50vh;
-    background: gray;
-    /* border-radius: .15em; */
-    position: relative;
-}
-
-.galleryGrid img {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    top: 0;
-    left: 0;
-    object-fit: cover;
-}
-
-.galleryGrid div:not(:last-child) {
     margin-bottom: 30px;
 }
 
@@ -119,7 +103,7 @@
 }
 
 .galleryFull {
-    padding-bottom: 1em;
+    padding-bottom: 30px;
 }
 
 .galleryFull img {
@@ -141,10 +125,60 @@
     color: #000;
 }
 
+.galleryFull {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.galleryFull div {
+    height: 100%;
+    margin: 0 auto;
+}
+
+.galleryVideo {
+    padding-bottom: 30px;
+    /* max-width: 1200px; */
+    margin: 0 auto;
+    /* position: relative; */
+}
+
+.videoContainer {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    padding-top: 56.25%; /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
+    border-radius: .15em;
+}
+
+.iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.hr {
+    border: none;
+    /* border-top: .15em solid black; */
+    height: .15em;
+    background-color: black;
+    border-radius: 3em;
+    display: block;
+}
+
 @media screen and (min-width: 768px) {
 
     .galleryFull {
         padding-bottom: 0;
+        height: 85vh;
+        /* height: 100%; */
+        position: relative;
     }
 
     .backToTop {
@@ -161,28 +195,27 @@
     }
 
     .gallery div:not(:last-child) {
-        margin-bottom: 0px;
+        /* margin-bottom: 0px; */
     }
 
     .galleryGrid {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 1em;
-        margin-top: .75em;
+        /* margin-top: .75em; */
+        margin-bottom: 30px;
         /* overflow-x: scroll; */
         /* margin: 0 -60px; */
     }
 
-   
-
     .galleryGrid div {
-        /* flex: 0 0 33.33vw; */
-        /* width: 33.33vw; */
-        height: 40vw;
-        /* margin-right: 30px; */
-        margin-bottom: 0;
-
+        margin-bottom: 0px;
     }
+
+    .galleryFull {
+        margin-bottom: 30px;
+    }
+   
     .root {
         padding: 0 60px;
     }

@@ -7,7 +7,7 @@ exports.onCreateWebpackConfig = ({
   plugins,
   actions,
 }) => {
-    console.log('stage', stage);
+    // console.log('stage', stage);
   if (stage === "build-html" || stage == "develop-html") {
     actions.setWebpackConfig({
       module: {

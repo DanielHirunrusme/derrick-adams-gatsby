@@ -5,6 +5,7 @@ import Sparkles from "react-sparkle";
 
 const ENDPOINT = "https://getform.io/f/d5a5e5cc-1ab0-4319-a0ab-34d87952085b";
 
+
 const InquireForm = ({ showForm = false, children }) => {
   const [submitted, setSubmitted] = useState(false);
   const [formStatus, setFormStatus] = useState(false);
@@ -69,11 +70,12 @@ const InquireForm = ({ showForm = false, children }) => {
                   <br />
                   $50,000 USD
                 </p>
-                <br />
                 <div className={s.productDetails}>
                 <p className="small">
-                  Price excludes shipping, taxes and installation fees. Upon purchase, a member of our team will reach out to provide
-                  more details. No refund policy.
+                <br />
+
+                Price excludes tax, shipping, and installation costs.
+Upon confirmation of your order, a member of our team will reach out to coordinate shipping.
                 </p>
                 </div>
               </div>

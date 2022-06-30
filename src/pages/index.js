@@ -54,6 +54,9 @@ export default function IndexPage({ data }) {
     y: null,
   });
 
+  // Gallery images
+  const gallery = data.gallery.edges;
+
   const getRandVR = () => {
     let num = Math.floor(Math.random() * (4 - 1) + 1);
 
@@ -76,7 +79,7 @@ export default function IndexPage({ data }) {
     if (typeof window) {
       const images = sortStringInts(data?.core?.edges);
       const vr = getRandVR();
-      console.log(images);
+      // console.log(images);
       if (window.innerWidth <= 768) {
         // mobile images
         images.map((img) => {
@@ -190,7 +193,7 @@ export default function IndexPage({ data }) {
 
   useEffect(() => {
     if (typeof window) {
-      window.scrollTo(0, 0);
+      // window.scrollTo(0, 0);
     }
   }, []);
 
@@ -266,7 +269,7 @@ export default function IndexPage({ data }) {
                     style={{ height: "100vh" }}
                   />
                 </div>
-                <Content ended={ended} setEnded={setEnded} />
+                <Content gallery={gallery} ended={ended} setEnded={setEnded} />
               </>
             );
           }}
@@ -291,6 +294,18 @@ export const query = graphql`
               quality: 90
               formats: [AUTO, WEBP]
             )
+          }
+        }
+      }
+    }
+    gallery: allFile(filter: { relativeDirectory: { in: "gallery" } }) {
+      edges {
+        node {
+          id
+          base
+          publicURL
+          childImageSharp {
+            gatsbyImageData
           }
         }
       }

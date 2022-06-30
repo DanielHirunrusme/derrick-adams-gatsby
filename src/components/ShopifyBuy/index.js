@@ -24,17 +24,17 @@ const ShopifyBuy = () => {
   useEffect(() => {
     // console.log(client)
     if (client) {
-      console.log(client);
+      // console.log(client);
       client.product.fetch(productId).then((product) => {
         // Do something with the product
-        console.log("product", product);
+        // console.log("product", product);
         setProduct(product);
       });
 
       // Create empty checkout
       client.checkout.create().then((checkout) => {
         // Do something with the checkout
-        console.log("checkout", checkout);
+        // console.log("checkout", checkout);
         setCheckout(checkout);
       });
     }
@@ -54,13 +54,13 @@ const ShopifyBuy = () => {
         .addLineItems(checkout.id, lineItemsToAdd)
         .then((checkout) => {
           // Do something with the updated checkout
-          console.log(checkout.lineItems); // Array with one additional line item
+          // console.log(checkout.lineItems); // Array with one additional line item
         });
     }
   }, [product, checkout]);
 
   const onClick = () => {
-    console.log("checkout product");
+    // console.log("checkout product");
     if (typeof window) {
       window.location.href = checkout.webUrl;
     }

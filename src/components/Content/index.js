@@ -8,8 +8,10 @@ import Sparkles from "react-sparkle";
 import InquireForm from "../InquireForm";
 import { AnchorLink } from "gatsby-plugin-anchor-links";
 import ShopifyBuy from "../ShopifyBuy";
+import { GatsbyImage } from "gatsby-plugin-image";
 
-const Content = ({ ended, setEnded, index }) => {
+const Content = ({ ended, gallery, setEnded, index }) => {
+  console.log({ gallery });
   return (
     <article className={s.root}>
       <div>
@@ -30,14 +32,14 @@ const Content = ({ ended, setEnded, index }) => {
               <p>
                 FUNTIME UNICORN builds off Derrick Adams’ signature iconography
                 and imagery via a continuation of the artist's acclaimed Floater
-                paintings&mdash;a collection of vivid portraits that show
-                Black people in various states of rest and play atop the
-                popularized plastic pool float. An ode to the Black Unicorn
-                figure first appearing in the Floater paintings, then realized
-                as life-size inflatable pool floats, Funtime Unicorn in this
-                latest iteration is a manifestation of Adams' conviction. The
-                idea that Black joy, love, and play should be normalized and
-                celebrated in popular visual culture.
+                paintings&mdash;a collection of vivid portraits that show Black
+                people in various states of rest and play atop the popularized
+                plastic pool float. An ode to the Black Unicorn figure first
+                appearing in the Floater paintings, then realized as life-size
+                inflatable pool floats, Funtime Unicorn in this latest iteration
+                is a manifestation of Adams' conviction. The idea that Black
+                joy, love, and play should be normalized and celebrated in
+                popular visual culture.
               </p>
             </article>
             <table className={s.table}>
@@ -101,19 +103,97 @@ const Content = ({ ended, setEnded, index }) => {
               <h2>
                 Galle<span style={{ letterSpacing: "0em" }}>r</span>y
               </h2>
-              <div>
-                <div className={s.galleryFull}>
-                  <img src="/interior.jpg" alt="Interior" />
-                </div>
-                <div className={s.galleryGrid}>
-                  <div>
-                    <img src="/park-2.jpg" alt="Park 2" />
-                  </div>
-                  <div>
-                    <img src="/park-1.jpg" alt="Park 1" />
-                  </div>
+              <div className={s.galleryFull}>
+                {/* 
+                0 = landscape
+                1 = landscape
+                2 = landscape
+                3 = portrait
+                4 = landscape
+                5 = portrait
+                6 = landscape
+                7 = landscape
+                8 = portrait
+                */}
+                <GatsbyImage
+                  objectFit="contain"
+                  image={gallery[7].node.childImageSharp.gatsbyImageData}
+                />
+              </div>
+              <div className={s.galleryVideo}>
+                <div className={s.videoContainer}>
+                  <iframe
+                    className={s.iframe}
+                    src="https://www.youtube.com/embed/-uA4NujLVhE?rel=0&modestbranding=1&autohide=1&showinfo=0&controls=0"
+                    title=""
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                  />
                 </div>
               </div>
+              <div className={s.galleryGrid}>
+                <GatsbyImage
+                  image={gallery[1].node.childImageSharp.gatsbyImageData}
+                />
+                <GatsbyImage
+                  image={gallery[2].node.childImageSharp.gatsbyImageData}
+                />
+              </div>
+              <div className={s.galleryFull}>
+                <GatsbyImage
+                  image={gallery[4].node.childImageSharp.gatsbyImageData}
+                />
+                {/* <GatsbyImage
+                  image={gallery[5].node.childImageSharp.gatsbyImageData}
+                /> */}
+              </div>
+              <div className={s.galleryVideo}>
+                <div className={s.videoContainer}>
+                  <iframe
+                    className={s.iframe}
+                    src="https://www.youtube.com/embed/AnbXqOJLuMk?autoplay=1&muted=1&rel=0&modestbranding=1&autohide=1&showinfo=0&controls=0"
+                    title="Funtime Unicorn In Use"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                    muted
+                  />
+                </div>
+              </div>
+              <div className={s.galleryFull}>
+                <GatsbyImage
+                  objectFit="contain"
+                  image={gallery[3].node.childImageSharp.gatsbyImageData}
+                />
+              </div>
+              <div className={s.galleryGrid}>
+                <GatsbyImage
+                  image={gallery[0].node.childImageSharp.gatsbyImageData}
+                />
+                <GatsbyImage
+                  image={gallery[6].node.childImageSharp.gatsbyImageData}
+                />
+              </div>
+              <div className={s.galleryFull}>
+                <GatsbyImage
+                  objectFit="contain"
+                  image={gallery[8].node.childImageSharp.gatsbyImageData}
+                />
+              </div>
+              {/* <div className={s.galleryFull}>
+                <GatsbyImage
+                  objectFit="contain"
+                  objectPosition="center"
+                  image={gallery[9].node.childImageSharp.gatsbyImageData}
+                />
+              </div> */}
+              <hr className={s.hr} />
+              <p className="small">
+                Derrick Adams, FUNTIME UNICORN, 2022 Installation view,
+                Rockefeller Center, New York, Courtesy of Derrick Adams Editions
+                Photography Satvik Bhati
+              </p>
             </article>
             <article className={s.purchase} id="Purchase">
               <h2>Purchase</h2>
@@ -121,13 +201,13 @@ const Content = ({ ended, setEnded, index }) => {
               {/* <InquireForm /> */}
             </article>
             <article className={s.backToTop}>
-            <AnchorLink
-              to="/#Top"
-              title="Back?"
-              className="stripped h2"
-              stripHash
-              // onAnchorLinkClick={anchorLinkClicked}
-            />
+              <AnchorLink
+                to="/#Top"
+                title="Back?"
+                className="stripped h2"
+                stripHash
+                // onAnchorLinkClick={anchorLinkClicked}
+              />
             </article>
           </section>
         </div>
