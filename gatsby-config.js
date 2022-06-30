@@ -3,7 +3,7 @@ require("dotenv").config()
 module.exports = {
   siteMetadata: {
     title: `Derrick Adams Editions`,
-    siteUrl: `https://derrickadamsmain.gtsb.io/`,
+    siteUrl: `https://derrickadamseditions.com/`,
   },
   plugins: [
     {
@@ -21,17 +21,6 @@ module.exports = {
         // crossOrigin: `use-credentials`,
       },
     },
-    // {
-    //   resolve: `gatsby-plugin-shopify-buy`,
-    //   options: {
-    //     stores: {
-    //       editions: {
-    //         domain: process.env.GATSBY_MYSHOPIFY_URL,
-    //         accessToken: process.env.SHOPIFY_APP_PASSWORD,
-    //       },
-    //     }
-    //   }
-    // },
     {
       resolve: "gatsby-source-shopify",
       options: {
@@ -49,9 +38,17 @@ module.exports = {
       }
     },
     {
-      resolve: "gatsby-plugin-google-analytics",
+      resolve: `gatsby-plugin-google-gtag`,
       options: {
-        trackingId: "G-YXBVEW33ND",
+        // You can add multiple tracking ids and a pageview event will be fired for all of them.
+        trackingIds: [
+          process.env.GOOGLE_ANALYTICS, // Google Analytics / GA
+        ],
+        // This object is used for configuration specific to this plugin
+        pluginConfig: {
+          head: false,
+          respectDNT: true,
+        },
       },
     },
     "gatsby-plugin-image",
