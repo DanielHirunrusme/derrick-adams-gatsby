@@ -155,7 +155,7 @@ const Content = ({ ended, gallery, setEnded, index }) => {
                 <div className={s.videoContainer}>
                   <iframe
                     className={s.iframe}
-                    src="https://www.youtube.com/embed/AnbXqOJLuMk?autoplay=1&muted=1&rel=0&modestbranding=1&autohide=1&showinfo=0&controls=0"
+                    src="https://www.youtube.com/embed/AnbXqOJLuMk?rel=0&modestbranding=1&autohide=1&showinfo=0&controls=0"
                     title="Funtime Unicorn In Use"
                     frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
